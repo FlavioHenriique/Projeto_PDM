@@ -85,7 +85,8 @@ public class menu extends AppCompatActivity
         } else if (id == R.id.meu_perfil) {
 
         } else if (id == R.id.meus_trabalhos) {
-
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.frame_container, new MeusTrabalhos()).commit();
         }
 
 
