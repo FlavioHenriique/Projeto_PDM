@@ -12,17 +12,13 @@
         <activity android:name=".Cadastro_usuario" />
         <activity
             android:name=".Cadastro_trabalho"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar">
+            </activity>
+        <activity android:name=".Inicial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
