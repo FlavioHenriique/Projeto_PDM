@@ -50,7 +50,7 @@
         android:hint="Informe sua cidade" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/estado"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
