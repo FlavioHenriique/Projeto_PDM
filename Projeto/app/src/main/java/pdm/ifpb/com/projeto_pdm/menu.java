@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +37,7 @@ public class menu extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().
                     add(R.id.frame_container, new TelaPrincipal()).commit();
         }
+
     }
 
     @Override

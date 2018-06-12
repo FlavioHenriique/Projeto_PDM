@@ -11,9 +11,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Cadastro_usuario"  android:exported="true"/>
         <activity
-            android:name=".Cadastro_trabalho"
-            android:exported="true" />
-        <activity
             android:name=".menu"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar">
