@@ -21,6 +21,7 @@ public class menu extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,11 +35,10 @@ public class menu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(savedInstanceState == null){
+        if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.frame_container, new TelaPrincipal()).commit();
         }
-
     }
 
     @Override
