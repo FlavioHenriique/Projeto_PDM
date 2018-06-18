@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MeusTrabalhos">
 
 
@@ -30,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end|bottom"
+        app:backgroundTint="@android:color/holo_blue_dark"
         android:layout_marginBottom="34dp"
         android:layout_marginEnd="33dp"
         android:src="@drawable/ic_add" />

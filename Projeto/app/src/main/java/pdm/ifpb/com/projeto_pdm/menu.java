@@ -1,5 +1,6 @@
 package pdm.ifpb.com.projeto_pdm;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -19,6 +21,7 @@ public class menu extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -32,7 +35,7 @@ public class menu extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(savedInstanceState == null){
+        if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.frame_container, new TelaPrincipal()).commit();
         }
@@ -77,6 +80,8 @@ public class menu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.sair) {
+            Intent intent = new Intent(menu.this, Inicial.class);
+            startActivity(intent);
 
         } else if (id == R.id.buscar_trabalhos) {
 
