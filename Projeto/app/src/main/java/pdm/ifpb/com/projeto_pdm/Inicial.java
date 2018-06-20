@@ -51,7 +51,7 @@ public class Inicial extends AppCompatActivity {
                     JSONObject json = new JSONObject();
                     json.put("email",email.getText().toString());
                     json.put("senha",senha.getText().toString());
-
+                    System.out.println(json.toString());
                     Intent intent = new Intent(Inicial.this,
                             LoginService.class);
                     intent.putExtra("login",json.toString());
