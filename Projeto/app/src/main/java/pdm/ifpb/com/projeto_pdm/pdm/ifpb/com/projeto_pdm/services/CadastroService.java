@@ -39,7 +39,7 @@ public class CadastroService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        corrigirInternet();
+        strictmode();
         Gson gson = new Gson();
 
         String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario/cadastro";
@@ -69,7 +69,7 @@ public class CadastroService extends Service {
         return START_STICKY;
     }
 
-    public void corrigirInternet(){
+    public void strictmode(){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
                 .Builder().permitAll().build();
 

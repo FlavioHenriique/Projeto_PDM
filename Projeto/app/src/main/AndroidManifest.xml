@@ -3,6 +3,7 @@
     package="pdm.ifpb.com.projeto_pdm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -33,6 +34,10 @@
 
         <service
             android:name=".pdm.ifpb.com.projeto_pdm.services.CadastroService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".pdm.ifpb.com.projeto_pdm.services.LoginService"
             android:enabled="true"
             android:exported="true"></service>
     </application>
