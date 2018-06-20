@@ -4,17 +4,17 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/loginEmail"
         android:layout_width="324dp"
         android:layout_height="45dp"
-        android:layout_above="@+id/editText2"
+        android:layout_above="@+id/loginSenha"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-163dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/loginSenha"
         android:layout_width="324dp"
         android:layout_height="42dp"
         android:layout_alignParentTop="true"
@@ -24,13 +24,15 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btEntrar"
         android:layout_width="321dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="187dp"
         android:text="Entrar"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_blue_dark"
         android:textSize="25sp" />
 
     <TextView
@@ -47,7 +49,7 @@
         android:id="@+id/cadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignEnd="@+id/loginEmail"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="129dp"
         android:textColor="#0000FF"
@@ -59,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignStart="@+id/loginEmail"
         android:layout_marginTop="91dp"
         android:text="Email" />
 
@@ -67,8 +69,8 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText2"
-        android:layout_alignStart="@+id/editText"
+        android:layout_above="@+id/loginSenha"
+        android:layout_alignStart="@+id/loginEmail"
         android:layout_marginBottom="-210dp"
         android:text="Senha" />
 
