@@ -1,10 +1,12 @@
-package pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.services;
+package pdm.ifpb.com.projeto_pdm.services;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.Message;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import pdm.ifpb.com.projeto_pdm.Inicial;
+import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 public class LoginService extends Service {
     public LoginService() {
@@ -41,12 +44,12 @@ public class LoginService extends Service {
             Request request = new Request.Builder().url(url).post(body).build();
 
             Response response = client.newCall(request).execute();
-            if(response.code() != 202){
+            if(response.code() != 200){
                 Toast.makeText(this, "Usuário não encontrado",
                         Toast.LENGTH_SHORT).show();
             }else{
                 Message msg = new Message();
-                msg.obj = response.code();
+                msg.obj = response.body().string();
 
                 Inicial.handler.sendMessage(msg);
             }

@@ -10,12 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.services.LoginService;
+import pdm.ifpb.com.projeto_pdm.model.Usuario;
+import pdm.ifpb.com.projeto_pdm.services.LoginService;
 
 public class Inicial extends AppCompatActivity {
 
@@ -51,7 +53,7 @@ public class Inicial extends AppCompatActivity {
                     JSONObject json = new JSONObject();
                     json.put("email",email.getText().toString());
                     json.put("senha",senha.getText().toString());
-                    System.out.println(json.toString());
+
                     Intent intent = new Intent(Inicial.this,
                             LoginService.class);
                     intent.putExtra("login",json.toString());
@@ -78,9 +80,11 @@ public class Inicial extends AppCompatActivity {
 
             @Override
             public void handleMessage(Message msg) {
-                int status = (int) msg.obj;
+
+                Gson gson = new Gson();
 
                 Intent intent = new Intent(Inicial.this, menu.class);
+                intent.putExtra("atual",(String) msg.obj);
                 startActivity(intent);
             }
         }

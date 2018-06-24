@@ -17,7 +17,7 @@
         android:textSize="30sp" />
 
     <EditText
-        android:id="@+id/cadNome"
+        android:id="@+id/atNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -71,7 +71,7 @@
         android:layout_width="216dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/cadNome"
+        android:layout_alignStart="@+id/atNome"
         android:layout_marginBottom="36dp"
         android:text="Cadastrar"
         android:textSize="20sp" />

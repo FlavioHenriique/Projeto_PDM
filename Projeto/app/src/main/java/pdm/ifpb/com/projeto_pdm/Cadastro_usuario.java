@@ -11,10 +11,8 @@ import android.widget.Spinner;
 
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.model.Usuario;
-import pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.services.CadastroService;
+import pdm.ifpb.com.projeto_pdm.model.Usuario;
+import pdm.ifpb.com.projeto_pdm.services.CadastroService;
 
 
 public class Cadastro_usuario extends AppCompatActivity {
@@ -38,7 +36,7 @@ public class Cadastro_usuario extends AppCompatActivity {
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText nome = findViewById(R.id.cadNome);
+                EditText nome = findViewById(R.id.atNome);
                 EditText cidade = findViewById(R.id.cadCidade);
 
                 EditText senha = findViewById(R.id.cadSenha);
@@ -52,7 +50,6 @@ public class Cadastro_usuario extends AppCompatActivity {
                 usuario.setSenha(senha.getText().toString());
 
                 Gson gson = new Gson();
-
 
                Intent intent = new Intent(Cadastro_usuario.this,
                        CadastroService.class);

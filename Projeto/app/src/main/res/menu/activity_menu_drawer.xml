@@ -5,6 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/tela_inicial"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Tela inicial" />
+
+        <item
             android:id="@+id/meu_perfil"
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="Meu perfil" />

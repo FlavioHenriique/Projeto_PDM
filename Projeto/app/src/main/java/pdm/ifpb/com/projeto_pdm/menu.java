@@ -2,6 +2,7 @@ package pdm.ifpb.com.projeto_pdm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.Menu;
@@ -15,10 +16,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
+
+import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 public class menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Usuario atual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +38,12 @@ public class menu extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
+        Gson gson = new Gson();
+        Intent intent = getIntent();
+        atual =  gson.fromJson(intent.getStringExtra("atual"),
+                Usuario.class);
+        strictmode();
+        nomeUsuario();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,8 +51,6 @@ public class menu extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
@@ -100,11 +112,40 @@ public class menu extends AppCompatActivity
         } else if (id == R.id.meus_trabalhos) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new MeusTrabalhos()).commit();
+        }else if (id == R.id.tela_inicial){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_container, new TelaPrincipal()).commit();
         }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public Usuario getAtual() {
+        return atual;
+    }
+
+    public void setAtual(Usuario atual) {
+        this.atual = atual;
+        nomeUsuario();
+    }
+
+    public void nomeUsuario(){
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View header = navigationView.getHeaderView(0);
+        TextView tv = header.findViewById(R.id.nomeUsuario);
+        tv.setText(atual.getNome());
+
+    }
+
+
+    public void strictmode(){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
+                .Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
     }
 }

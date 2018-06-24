@@ -1,29 +1,19 @@
-package pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.services;
+package pdm.ifpb.com.projeto_pdm.services;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.StrictMode;
-import android.provider.MediaStore;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import org.apache.http.params.HttpParams;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
-import pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 public class CadastroService extends Service {
     public CadastroService() {
@@ -40,7 +30,6 @@ public class CadastroService extends Service {
 
 
         strictmode();
-        Gson gson = new Gson();
 
         String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario/cadastro";
         OkHttpClient client = new OkHttpClient();
@@ -54,7 +43,7 @@ public class CadastroService extends Service {
         try {
 
             Response response = client.newCall(request).execute();
-            System.out.println(response.code());
+
             if (response.code() == 201){
                 Toast.makeText(this, "Usuário cadastrado!",
                         Toast.LENGTH_SHORT).show();
