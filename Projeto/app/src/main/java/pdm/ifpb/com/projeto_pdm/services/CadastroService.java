@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.controller.UsuarioController;
 
 public class CadastroService extends Service {
     public CadastroService() {
@@ -28,32 +29,10 @@ public class CadastroService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-
         strictmode();
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario/cadastro";
-        OkHttpClient client = new OkHttpClient();
-
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, intent.getStringExtra("usuario"));
-
-        Request request = new Request.Builder().url(url)
-                .post(body).build();
-
-        try {
-
-            Response response = client.newCall(request).execute();
-
-            if (response.code() == 201){
-                Toast.makeText(this, "Usuário cadastrado!",
-                        Toast.LENGTH_SHORT).show();
-            }else if (response.code() == 403){
-                Toast.makeText(this, "Este email já está sendo utilizado!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        UsuarioController controller = new UsuarioController(getBaseContext());
+        controller.cadastrar(intent.getStringExtra("usuario"));
 
         return START_STICKY;
     }

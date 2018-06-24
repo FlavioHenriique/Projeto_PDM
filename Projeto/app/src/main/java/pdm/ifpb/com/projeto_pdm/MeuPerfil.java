@@ -22,6 +22,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.controller.UsuarioController;
+import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 import static pdm.ifpb.com.projeto_pdm.R.layout.support_simple_spinner_dropdown_item;
@@ -80,28 +82,9 @@ public class MeuPerfil extends Fragment {
                 u.setNome(atNome.getText().toString());
                 u.setSenha(atSenha.getText().toString());
                 u.setEmail(atual.getEmail());
-                System.out.println(u.toString());
-                Gson gson = new Gson();
 
-                String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario";
-                OkHttpClient client = new OkHttpClient();
-
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                RequestBody body = RequestBody.create(JSON, gson.toJson(u));
-
-                Request request = new Request.Builder().url(url).put(body).build();
-
-                try {
-                    Response response = client.newCall(request).execute();
-                    Toast.makeText(getContext(), "Usuário atualizado",
-                            Toast.LENGTH_SHORT).show();
-
-                    ((menu) getActivity()).setAtual(gson.fromJson(response.body()
-                            .string(),Usuario.class));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                UsuarioController controller = new UsuarioController(getContext());
+                ((menu) getActivity()).setAtual(controller.atualizar(u));
             }
         });
     }

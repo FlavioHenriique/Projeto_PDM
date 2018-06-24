@@ -23,10 +23,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 
 public class cadastro_trabalho extends Fragment {
+
 
 
     public cadastro_trabalho() {
@@ -47,6 +49,8 @@ public class cadastro_trabalho extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        final TrabalhoController controller = new TrabalhoController(getContext());
 
         String[] categorias = {"Construção","Informática","Mecânica"};
         String[] arrayEstados = {"PB","PE","RJ","SP","SC"};
@@ -89,30 +93,14 @@ public class cadastro_trabalho extends Fragment {
                 trabalho.setEstado(estados.getSelectedItem().toString());
                 trabalho.setValor(Float.parseFloat(valor.getText().toString()));
 
+                controller.cadastrar(trabalho);
 
-                Gson gson = new Gson();
+                cidade.setText("");
+                valor.setText("");
+                horario.setText("");
+                data.setText("");
+                descricao.setText("");
 
-                OkHttpClient client = new OkHttpClient();
-                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho";
-
-                RequestBody body = RequestBody.create(JSON, gson.toJson(trabalho));
-
-                Request request = new Request.Builder().url(url).post(body).build();
-
-                try {
-                    Response response = client.newCall(request).execute();
-
-                    if(response.code() == 201){
-                        Toast.makeText(getContext(), "Trabalho cadastrado",
-                                Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getContext(), "Erro!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         });
     }

@@ -19,6 +19,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import pdm.ifpb.com.projeto_pdm.Inicial;
+import pdm.ifpb.com.projeto_pdm.controller.UsuarioController;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 public class LoginService extends Service {
@@ -33,32 +34,14 @@ public class LoginService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        try {
-            JSONObject json = new JSONObject(intent.getStringExtra("login"));
-            String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario";
-            OkHttpClient client = new OkHttpClient();
-            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            UsuarioController controller = new UsuarioController(getBaseContext());
 
-            RequestBody body = RequestBody.create(JSON, intent.getStringExtra("login"));
 
-            Request request = new Request.Builder().url(url).post(body).build();
+            Message msg = new Message();
+            msg.obj = controller.login(intent.getStringExtra("login"));
 
-            Response response = client.newCall(request).execute();
-            if(response.code() != 200){
-                Toast.makeText(this, "Usuário não encontrado",
-                        Toast.LENGTH_SHORT).show();
-            }else{
-                Message msg = new Message();
-                msg.obj = response.body().string();
+            Inicial.handler.sendMessage(msg);
 
-                Inicial.handler.sendMessage(msg);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return START_STICKY;
     }
 }

@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
@@ -37,7 +38,6 @@ public class MeusTrabalhos extends Fragment {
     private Trabalho[] lista;
 
     public MeusTrabalhos() {
-
     }
 
 
@@ -71,29 +71,13 @@ public class MeusTrabalhos extends Fragment {
 
     private void meusTrabalhos() {
 
-        OkHttpClient client = new OkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
         String email = ((menu) getActivity()).getAtual().getEmail();
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/"+ email;
+        TrabalhoController controller = new TrabalhoController(getContext());
+        lista = controller.meusTrabalhos(email);
 
-        Request request = new Request.Builder().url(url).get().build();
-        Gson gson = new Gson();
-
-        try {
-            Response response = client.newCall(request).execute();
-            lista = gson.fromJson(response.body().string(), Trabalho[].class);
-
-            ListView lview = getView().findViewById(R.id.listaTrabalhos);
-
-            MyAdapter adapter = new MyAdapter(getContext());
-
-            lview.setAdapter(adapter);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        ListView lview = getView().findViewById(R.id.listaTrabalhos);
+        MyAdapter adapter = new MyAdapter(getContext());
+        lview.setAdapter(adapter);
     }
 
     private class MyAdapter extends BaseAdapter{
@@ -126,12 +110,18 @@ public class MeusTrabalhos extends Fragment {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             view = inflater.inflate(R.layout.trabalhos, null);
 
-            TextView nome = view.findViewById(R.id.tNome);
+            final TextView nome = view.findViewById(R.id.tNome);
             TextView descricao = view.findViewById(R.id.tDescricao);
 
             nome.setText(lista[position].getTitulo());
             descricao.setText(lista[position].getDescricao());
-
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, nome.getText().toString(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
             return view;
         }
     }
