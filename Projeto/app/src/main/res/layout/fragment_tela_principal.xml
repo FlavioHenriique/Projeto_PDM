@@ -7,7 +7,7 @@
 
 
     <ListView
-        android:id="@+id/lista"
+        android:id="@+id/trabalhosCidade"
         android:layout_width="match_parent"
         android:layout_height="439dp"
         android:layout_alignParentBottom="true"
@@ -21,6 +21,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="24dp"
         android:layout_marginTop="19dp"
-        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:text="Trabalhos na sua cidade" />
 </RelativeLayout>

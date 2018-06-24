@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.adapter.MyAdapter;
 import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
@@ -76,55 +77,10 @@ public class MeusTrabalhos extends Fragment {
         lista = controller.meusTrabalhos(email);
 
         ListView lview = getView().findViewById(R.id.listaTrabalhos);
-        MyAdapter adapter = new MyAdapter(getContext());
+        MyAdapter adapter = new MyAdapter(getContext(),lista);
         lview.setAdapter(adapter);
     }
 
-    private class MyAdapter extends BaseAdapter{
-
-        Context context;
-
-        public MyAdapter(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public int getCount() {
-            return lista.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return lista[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            View view = convertView;
-            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-            view = inflater.inflate(R.layout.trabalhos, null);
-
-            final TextView nome = view.findViewById(R.id.tNome);
-            TextView descricao = view.findViewById(R.id.tDescricao);
-
-            nome.setText(lista[position].getTitulo());
-            descricao.setText(lista[position].getDescricao());
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, nome.getText().toString(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
-            return view;
-        }
-    }
 
 }
 

@@ -2,6 +2,8 @@ package pdm.ifpb.com.projeto_pdm;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import pdm.ifpb.com.projeto_pdm.adapter.MyAdapter;
+import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
+import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 public class TelaPrincipal extends Fragment {
 
@@ -24,7 +30,21 @@ public class TelaPrincipal extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         return inflater.inflate(R.layout.fragment_tela_principal, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        String cidade = ((menu)getActivity()).getAtual().getCidade();
+
+        TrabalhoController controller = new TrabalhoController(getContext());
+        Trabalho[] lista = controller.buscarTrabalhos("cidade",cidade);
+
+        ListView listView = getView().findViewById(R.id.trabalhosCidade);
+        MyAdapter adapter = new MyAdapter(getContext(), lista);
+        listView.setAdapter(adapter);
+    }
 }

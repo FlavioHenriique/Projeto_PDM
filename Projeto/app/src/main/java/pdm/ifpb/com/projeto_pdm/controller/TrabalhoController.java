@@ -69,4 +69,23 @@ public class TrabalhoController {
         return null;
     }
 
+    public Trabalho[] buscarTrabalhos(String campo, String valor){
+
+        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/busca/"
+                +campo+"/" + valor;
+
+        Request request = new Request.Builder().url(url).get().build();
+
+        try {
+            Response response = client.newCall(request).execute();
+
+            return gson.fromJson(response.body().string(), Trabalho[].class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

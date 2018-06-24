@@ -75,7 +75,6 @@ public class MeuPerfil extends Fragment {
         btAtualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Usuario u = new Usuario();
                 u.setCidade(atCidade.getText().toString());
                 u.setEstado(spinner.getSelectedItem().toString());
