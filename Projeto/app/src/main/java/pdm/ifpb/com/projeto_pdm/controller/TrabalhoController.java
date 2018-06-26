@@ -43,7 +43,7 @@ public class TrabalhoController {
             Response response = client.newCall(request).execute();
 
             if(response.code() == 201){
-                Toast.makeText(context, "Trabalho cadastrado - controler",
+                Toast.makeText(context, "Trabalho cadastrado",
                         Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(context, "Erro!",
@@ -63,8 +63,12 @@ public class TrabalhoController {
 
         try {
             Response response = client.newCall(request).execute();
-            return Arrays.asList(gson.fromJson(response.body()
-                    .string(), Trabalho[].class));
+
+            if(response.body() != null){
+
+                return Arrays.asList(gson.fromJson(response.body()
+                        .string(), Trabalho[].class));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

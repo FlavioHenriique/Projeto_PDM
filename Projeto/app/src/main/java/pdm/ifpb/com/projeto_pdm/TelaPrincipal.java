@@ -48,6 +48,7 @@ public class TelaPrincipal extends Fragment {
 
         ListView listView = getView().findViewById(R.id.trabalhosCidade);
         MyAdapter adapter = new MyAdapter(getContext(),lista);
+        adapter.setManager(getFragmentManager());
         listView.setAdapter(adapter);
     }
 

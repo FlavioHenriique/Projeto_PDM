@@ -42,6 +42,7 @@ public class menu extends AppCompatActivity
         Intent intent = getIntent();
         atual =  gson.fromJson(intent.getStringExtra("atual"),
                 Usuario.class);
+        System.out.println(atual.toString());
         strictmode();
         nomeUsuario();
 
@@ -104,6 +105,7 @@ public class menu extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new busca()).commit();
+
         } else if (id == R.id.meu_perfil) {
 
             getSupportFragmentManager().beginTransaction().
@@ -112,11 +114,13 @@ public class menu extends AppCompatActivity
         } else if (id == R.id.meus_trabalhos) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new MeusTrabalhos()).commit();
+
         }else if (id == R.id.tela_inicial){
+
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, new TelaPrincipal()).commit();
-        }
 
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
