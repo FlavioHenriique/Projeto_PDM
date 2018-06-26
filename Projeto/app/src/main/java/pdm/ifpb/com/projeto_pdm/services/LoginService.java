@@ -36,7 +36,6 @@ public class LoginService extends Service {
 
             UsuarioController controller = new UsuarioController(getBaseContext());
 
-
             Message msg = new Message();
             msg.obj = controller.login(intent.getStringExtra("login"));
 

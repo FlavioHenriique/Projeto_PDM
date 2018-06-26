@@ -6,6 +6,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -51,7 +54,7 @@ public class TrabalhoController {
         }
     }
 
-    public Trabalho[] meusTrabalhos(String email){
+    public List<Trabalho> meusTrabalhos(String email){
 
 
         String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/"+ email;
@@ -60,7 +63,8 @@ public class TrabalhoController {
 
         try {
             Response response = client.newCall(request).execute();
-            return gson.fromJson(response.body().string(), Trabalho[].class);
+            return Arrays.asList(gson.fromJson(response.body()
+                    .string(), Trabalho[].class));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,7 +73,7 @@ public class TrabalhoController {
         return null;
     }
 
-    public Trabalho[] buscarTrabalhos(String campo, String valor){
+    public List<Trabalho> buscarTrabalhos(String campo, String valor, String email){
 
         String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/busca/"
                 +campo+"/" + valor;
@@ -79,13 +83,28 @@ public class TrabalhoController {
         try {
             Response response = client.newCall(request).execute();
 
-            return gson.fromJson(response.body().string(), Trabalho[].class);
+            return verificaContratante(email,gson.fromJson(response.body()
+                    .string(), Trabalho[].class));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+
+    public List<Trabalho> verificaContratante(String email,Trabalho[] lista){
+
+        List<Trabalho> novaLista = new ArrayList<>();
+
+        for(Trabalho t: lista){
+            if(!t.getContratante().getEmail().equals(email)){
+                novaLista.add(t);
+            }
+        }
+
+        return novaLista;
     }
 
 }

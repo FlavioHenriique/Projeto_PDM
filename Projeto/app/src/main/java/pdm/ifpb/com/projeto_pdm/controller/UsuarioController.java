@@ -39,7 +39,7 @@ public class UsuarioController {
         try {
             Response response = client.newCall(request).execute();
             if(response.code() != 200){
-                Toast.makeText(context, "Usuário não encontrado controa",
+                Toast.makeText(context, "Usuário não encontrado",
                         Toast.LENGTH_SHORT).show();
             }else{
                 return response.body().string();

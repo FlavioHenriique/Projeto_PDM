@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -36,7 +37,7 @@ import pdm.ifpb.com.projeto_pdm.model.Usuario;
 public class MeusTrabalhos extends Fragment {
 
 
-    private Trabalho[] lista;
+    private List<Trabalho> lista = new ArrayList<>();
 
     public MeusTrabalhos() {
     }
