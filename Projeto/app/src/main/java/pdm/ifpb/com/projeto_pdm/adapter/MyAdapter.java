@@ -23,15 +23,19 @@ import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 public class MyAdapter extends BaseAdapter{
 
+
+    private String tela;
     private Context context;
     private List<Trabalho> lista;
     private FragmentManager manager;
 
-    public MyAdapter(Context context, List<Trabalho> lista) {
+    public MyAdapter(Context context, List<Trabalho> lista, String tela) {
         this.lista = lista;
+        this.tela = tela;
         this.context = context;
 
     }
+
 
     public FragmentManager getManager() {
         return manager;
@@ -77,6 +81,7 @@ public class MyAdapter extends BaseAdapter{
                 Fragment fragment = new TelaTrabalho();
                 Bundle bundle = new Bundle();
                 bundle.putString("atual",gson.toJson(lista.get(position)));
+                bundle.putString("tela",tela);
                 fragment.setArguments(bundle);
 
                 manager.beginTransaction()

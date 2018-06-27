@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +39,12 @@ public class TelaTrabalho extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         Bundle argumento = getArguments();
+
+        verificarAnterior(argumento.getString("tela"));
+
         Trabalho atual = gson.fromJson(argumento.getString("atual"),
                 Trabalho.class);
 
@@ -55,5 +61,21 @@ public class TelaTrabalho extends Fragment {
         horario.setText(atual.getHorario().toString() + "h - " + atual.getData());
         valor.setText(atual.getValor()+  " R$");
 
+    }
+
+    public void verificarAnterior(String tela){
+
+        Button bt = getActivity().findViewById(R.id.btSolicitar);
+
+        switch(tela){
+            case "meusTrabalhos":{
+
+                bt.setVisibility(View.GONE);
+                break;
+            }
+            case "busca":{
+                break;
+            }
+        }
     }
 }

@@ -62,7 +62,7 @@
             android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btSolicitar"
         android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/valortrab"
@@ -73,6 +73,7 @@
         android:textSize="25sp" />
 
     <ListView
+        android:id="@+id/listaSolicitantes"
         android:layout_width="315dp"
         android:layout_height="242dp"
         android:layout_alignParentBottom="true"

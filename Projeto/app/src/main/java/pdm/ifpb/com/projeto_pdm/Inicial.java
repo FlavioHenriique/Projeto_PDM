@@ -86,6 +86,7 @@ public class Inicial extends AppCompatActivity {
                 Intent intent = new Intent(Inicial.this, menu.class);
                 intent.putExtra("atual",(String) msg.obj);
                 startActivity(intent);
+
             }
         }
 }

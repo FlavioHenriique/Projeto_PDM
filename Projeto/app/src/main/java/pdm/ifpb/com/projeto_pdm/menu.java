@@ -42,7 +42,7 @@ public class menu extends AppCompatActivity
         Intent intent = getIntent();
         atual =  gson.fromJson(intent.getStringExtra("atual"),
                 Usuario.class);
-        System.out.println(atual.toString());
+
         strictmode();
         nomeUsuario();
 

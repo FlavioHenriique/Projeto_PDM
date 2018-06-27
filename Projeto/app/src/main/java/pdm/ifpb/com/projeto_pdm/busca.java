@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,6 +24,7 @@ import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 public class busca extends Fragment {
 
+    private ListView listView;
 
     public busca() {
     }
@@ -36,22 +40,59 @@ public class busca extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+         listView = getActivity().findViewById(R.id.listaBusca);
+
+        String[] categorias = {"Construção","Informática","Mecânica"};
+        final Spinner spinner = getActivity().findViewById(R.id.buscaCategoria);
+        ArrayAdapter adapterCategoria = new ArrayAdapter(this.getContext(),R.layout
+                .support_simple_spinner_dropdown_item, categorias);
+        adapterCategoria.setDropDownViewResource(R.layout
+                .support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterCategoria);
+
+        Button btcategoria = getActivity().findViewById(R.id.btBuscaCategoria);
+        btcategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TrabalhoController controller = new TrabalhoController(getContext());
+                List<Trabalho> lista = controller.buscarTrabalhos("categoria",
+                        spinner.getSelectedItem().toString(),
+                        ((menu)getActivity()).getAtual().getEmail());
+
+                criarAdapter(lista);
+            }
+        });
+
+
         Button bt = getActivity().findViewById(R.id.btBuscaCidade);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText busca = getActivity().findViewById(R.id.cidadeBuscada);
-                ListView listView = getActivity().findViewById(R.id.busca_cidade);
 
-                TrabalhoController controller = new TrabalhoController(getContext());
-                List<Trabalho> lista= controller.buscarTrabalhos("cidade",
-                        busca.getText().toString(),
-                        ((menu)getActivity()).getAtual().getEmail());
 
-                MyAdapter adapter = new MyAdapter(getContext(),lista);
-                adapter.setManager(getFragmentManager());
-                listView.setAdapter(adapter);
+                if(!busca.getText().toString().equals("")){
+
+                    TrabalhoController controller = new TrabalhoController(getContext());
+                    List<Trabalho> lista= controller.buscarTrabalhos("cidade",
+                            busca.getText().toString(),
+                            ((menu)getActivity()).getAtual().getEmail());
+
+                    criarAdapter(lista);
+
+                }else{
+                    Toast.makeText(getContext(), "Preencha o campo",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
+    }
+
+    public void criarAdapter(List<Trabalho> lista){
+        MyAdapter adapter = new MyAdapter(getContext(),lista,"busca");
+        adapter.setManager(getFragmentManager());
+        listView.setAdapter(adapter);
     }
 }
