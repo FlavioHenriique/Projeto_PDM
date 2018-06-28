@@ -25,7 +25,7 @@ import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 public class busca extends Fragment {
 
     private ListView listView;
-
+    private String email;
     public busca() {
     }
 
@@ -40,7 +40,9 @@ public class busca extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-         listView = getActivity().findViewById(R.id.listaBusca);
+        email = ((menu)getActivity()).getAtual().getEmail();
+
+        listView = getActivity().findViewById(R.id.listaBusca);
 
         String[] categorias = {"Construção","Informática","Mecânica"};
         final Spinner spinner = getActivity().findViewById(R.id.buscaCategoria);
@@ -57,7 +59,7 @@ public class busca extends Fragment {
                 TrabalhoController controller = new TrabalhoController(getContext());
                 List<Trabalho> lista = controller.buscarTrabalhos("categoria",
                         spinner.getSelectedItem().toString(),
-                        ((menu)getActivity()).getAtual().getEmail());
+                        email);
 
                 criarAdapter(lista);
             }
@@ -76,7 +78,7 @@ public class busca extends Fragment {
                     TrabalhoController controller = new TrabalhoController(getContext());
                     List<Trabalho> lista= controller.buscarTrabalhos("cidade",
                             busca.getText().toString(),
-                            ((menu)getActivity()).getAtual().getEmail());
+                            email);
 
                     criarAdapter(lista);
 
@@ -91,7 +93,7 @@ public class busca extends Fragment {
     }
 
     public void criarAdapter(List<Trabalho> lista){
-        MyAdapter adapter = new MyAdapter(getContext(),lista,"busca");
+        MyAdapter adapter = new MyAdapter(getContext(),lista,"busca",email);
         adapter.setManager(getFragmentManager());
         listView.setAdapter(adapter);
     }

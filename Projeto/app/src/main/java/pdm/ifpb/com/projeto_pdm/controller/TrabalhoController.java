@@ -111,4 +111,20 @@ public class TrabalhoController {
         return novaLista;
     }
 
+    public void excluirTrabalho(int codigo){
+
+        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/"+codigo;
+
+        Request request = new Request.Builder().url(url).delete().build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.code() == 200){
+                Toast.makeText(context, "Trabalho deletado com sucesso",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

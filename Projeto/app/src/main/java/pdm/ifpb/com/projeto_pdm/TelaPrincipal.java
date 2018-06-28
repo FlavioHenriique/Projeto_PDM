@@ -47,7 +47,7 @@ public class TelaPrincipal extends Fragment {
         List<Trabalho> lista = controller.buscarTrabalhos("cidade",cidade,email);
 
         ListView listView = getView().findViewById(R.id.trabalhosCidade);
-        MyAdapter adapter = new MyAdapter(getContext(),lista, "busca");
+        MyAdapter adapter = new MyAdapter(getContext(),lista, "busca",email);
         adapter.setManager(getFragmentManager());
         listView.setAdapter(adapter);
     }

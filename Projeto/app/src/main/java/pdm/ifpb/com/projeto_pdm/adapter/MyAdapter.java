@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,11 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import pdm.ifpb.com.projeto_pdm.MeusTrabalhos;
 import pdm.ifpb.com.projeto_pdm.R;
 import pdm.ifpb.com.projeto_pdm.TelaTrabalho;
 import pdm.ifpb.com.projeto_pdm.cadastro_trabalho;
+import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 public class MyAdapter extends BaseAdapter{
@@ -28,9 +31,11 @@ public class MyAdapter extends BaseAdapter{
     private Context context;
     private List<Trabalho> lista;
     private FragmentManager manager;
+    private String email;
 
-    public MyAdapter(Context context, List<Trabalho> lista, String tela) {
+    public MyAdapter(Context context, List<Trabalho> lista, String tela, String email) {
         this.lista = lista;
+        this.email = email;
         this.tela = tela;
         this.context = context;
 
@@ -71,6 +76,14 @@ public class MyAdapter extends BaseAdapter{
         final TextView nome = view.findViewById(R.id.tNome);
         TextView descricao = view.findViewById(R.id.tDescricao);
 
+        if(email.equals(lista.get(position).getContratante().getEmail())){
+
+
+            opcaoExcluir(view,position,true);
+        }else{
+            opcaoExcluir(view,position,false);
+        }
+
         nome.setText(lista.get(position).getTitulo());
         descricao.setText(lista.get(position).getDescricao());
 
@@ -92,4 +105,31 @@ public class MyAdapter extends BaseAdapter{
         });
         return view;
     }
+
+    public void opcaoExcluir(View view, final int position, boolean verificacao){
+
+        ImageView excluir = view.findViewById(R.id.excluir);
+        if(verificacao){
+
+            excluir = view.findViewById(R.id.excluir);
+            excluir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TrabalhoController controller = new TrabalhoController(context);
+                    controller.excluirTrabalho(lista.get(position).getCodigo());
+
+                    Fragment fragment = new MeusTrabalhos();
+                    manager.beginTransaction()
+                            .replace(R.id.frame_container, fragment)
+                            .commit();
+                }
+            });
+        }else{
+            excluir.setVisibility(View.GONE);
+        }
+
+    }
+
+
+
 }

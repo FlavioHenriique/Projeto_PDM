@@ -78,7 +78,7 @@ public class MeusTrabalhos extends Fragment {
         lista = controller.meusTrabalhos(email);
 
         ListView lview = getView().findViewById(R.id.listaTrabalhos);
-        MyAdapter adapter = new MyAdapter(getContext(),lista, "meusTrabalhos");
+        MyAdapter adapter = new MyAdapter(getContext(),lista, "meusTrabalhos",email);
         adapter.setManager(getFragmentManager());
         lview.setAdapter(adapter);
     }
