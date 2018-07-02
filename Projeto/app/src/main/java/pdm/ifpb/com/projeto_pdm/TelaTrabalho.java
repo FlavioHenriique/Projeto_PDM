@@ -32,7 +32,6 @@ public class TelaTrabalho extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         return inflater.inflate(R.layout.fragment_tela_trabalho,
                 container, false);
     }
@@ -40,10 +39,6 @@ public class TelaTrabalho extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-
-
 
         Bundle argumento = getArguments();
 

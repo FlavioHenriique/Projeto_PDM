@@ -100,6 +100,7 @@ public class menu extends AppCompatActivity
         if (id == R.id.sair) {
             Intent intent = new Intent(menu.this, Inicial.class);
             startActivity(intent);
+            finish();
 
         } else if (id == R.id.buscar_trabalhos) {
 
@@ -133,7 +134,7 @@ public class menu extends AppCompatActivity
 
     public void setAtual(Usuario atual) {
         this.atual = atual;
-        nomeUsuario();
+
     }
 
     public void nomeUsuario(){
@@ -141,6 +142,7 @@ public class menu extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         TextView tv = header.findViewById(R.id.nomeUsuario);
+
         tv.setText(atual.getNome());
 
     }

@@ -22,16 +22,18 @@ public class UsuarioController {
     private Gson gson;
     private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private Context context;
+    private String urlApi;
 
     public UsuarioController(Context context){
         client = new OkHttpClient();
         this.context = context;
+        this.urlApi ="http://10.0.3.2:8080/pdm-api/pdm/usuario";
         this.gson = new Gson();
     }
 
     public String login(String dados){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario";
+        String url = urlApi;
         RequestBody body = RequestBody.create(JSON, dados);
 
         Request request = new Request.Builder().url(url).post(body).build();
@@ -53,7 +55,7 @@ public class UsuarioController {
 
     public void cadastrar(String dados){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario/cadastro";
+        String url = urlApi.concat("/cadastro");
         RequestBody body = RequestBody.create(JSON, dados);
         Request request = new Request.Builder().url(url)
                 .post(body).build();
@@ -76,7 +78,7 @@ public class UsuarioController {
 
     public Usuario atualizar(Usuario u){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/usuario";
+        String url = urlApi;
         RequestBody body = RequestBody.create(JSON, gson.toJson(u));
         Request request = new Request.Builder().url(url).put(body).build();
 

@@ -36,10 +36,13 @@ public class LoginService extends Service {
 
             UsuarioController controller = new UsuarioController(getBaseContext());
 
-            Message msg = new Message();
-            msg.obj = controller.login(intent.getStringExtra("login"));
 
-            Inicial.handler.sendMessage(msg);
+            String user = controller.login(intent.getStringExtra("login"));
+            if(user != null){
+                Message msg = new Message();
+                msg.obj = user;
+                Inicial.handler.sendMessage(msg);
+            }
 
         return START_STICKY;
     }

@@ -24,16 +24,18 @@ public class TrabalhoController {
     private Gson gson;
     private OkHttpClient client;
     private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private String urlApi;
 
     public TrabalhoController(Context context){
         gson = new Gson();
+        this.urlApi = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/";
         client = new OkHttpClient();
         this.context = context;
     }
 
     public void cadastrar(Trabalho trabalho){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho";
+        String url = urlApi;
 
         RequestBody body = RequestBody.create(JSON, gson.toJson(trabalho));
 
@@ -57,7 +59,7 @@ public class TrabalhoController {
     public List<Trabalho> meusTrabalhos(String email){
 
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/"+ email;
+        String url = urlApi  +email;
 
         Request request = new Request.Builder().url(url).get().build();
 
@@ -79,13 +81,14 @@ public class TrabalhoController {
 
     public List<Trabalho> buscarTrabalhos(String campo, String valor, String email){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/busca/"
-                +campo+"/" + valor;
+        String url = urlApi + "busca/" +campo+"/" + valor;
 
         Request request = new Request.Builder().url(url).get().build();
 
         try {
             Response response = client.newCall(request).execute();
+
+
 
             return verificaContratante(email,gson.fromJson(response.body()
                     .string(), Trabalho[].class));
@@ -113,7 +116,7 @@ public class TrabalhoController {
 
     public void excluirTrabalho(int codigo){
 
-        String url = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/"+codigo;
+        String url = urlApi +codigo;
 
         Request request = new Request.Builder().url(url).delete().build();
 

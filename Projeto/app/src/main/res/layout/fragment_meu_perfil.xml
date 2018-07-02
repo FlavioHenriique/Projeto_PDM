@@ -19,18 +19,18 @@
 
     <EditText
         android:id="@+id/atNome"
-        android:layout_width="wrap_content"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="92dp"
         android:ems="10"
-        android:text="Nome do usuário"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="Nome do usuário" />
 
     <EditText
         android:id="@+id/atCidade"
-        android:layout_width="wrap_content"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -41,7 +41,7 @@
 
     <Spinner
         android:id="@+id/atEstado"
-        android:layout_width="212dp"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -49,25 +49,24 @@
 
     <EditText
         android:id="@+id/atSenha"
-        android:layout_width="wrap_content"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="174dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="Senha" />
+         />
 
     <Button
         android:id="@+id/btAtualizar"
-        android:layout_width="210dp"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="89dp"
+        android:layout_marginBottom="42dp"
         android:background="@android:color/holo_blue_dark"
         android:text="Atualizar"
-
         android:textColor="@android:color/white"
         android:textSize="25sp" />
 

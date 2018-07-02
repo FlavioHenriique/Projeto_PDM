@@ -41,7 +41,6 @@ public class MyAdapter extends BaseAdapter{
 
     }
 
-
     public FragmentManager getManager() {
         return manager;
     }
@@ -100,7 +99,6 @@ public class MyAdapter extends BaseAdapter{
                 manager.beginTransaction()
                         .replace(R.id.frame_container, fragment)
                         .commit();
-
             }
         });
         return view;
@@ -127,9 +125,5 @@ public class MyAdapter extends BaseAdapter{
         }else{
             excluir.setVisibility(View.GONE);
         }
-
     }
-
-
-
 }
