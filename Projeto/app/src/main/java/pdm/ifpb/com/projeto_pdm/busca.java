@@ -65,20 +65,18 @@ public class busca extends Fragment {
             }
         });
 
-
         Button bt = getActivity().findViewById(R.id.btBuscaCidade);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText busca = getActivity().findViewById(R.id.cidadeBuscada);
 
+                EditText busca = getActivity().findViewById(R.id.cidadeBuscada);
 
                 if(!busca.getText().toString().equals("")){
 
                     TrabalhoController controller = new TrabalhoController(getContext());
                     List<Trabalho> lista= controller.buscarTrabalhos("cidade",
-                            busca.getText().toString(),
-                            email);
+                            busca.getText().toString(), email);
 
                     criarAdapter(lista);
 
@@ -86,15 +84,19 @@ public class busca extends Fragment {
                     Toast.makeText(getContext(), "Preencha o campo",
                             Toast.LENGTH_SHORT).show();
                 }
-
-
-            }
+       }
         });
     }
 
     public void criarAdapter(List<Trabalho> lista){
+
+        if(lista.isEmpty()){
+            Toast.makeText(getContext(),"Nenhum trabalho foi encontrado!",
+                    Toast.LENGTH_SHORT).show();
+        }
         MyAdapter adapter = new MyAdapter(getContext(),lista,"busca",email);
         adapter.setManager(getFragmentManager());
         listView.setAdapter(adapter);
+
     }
 }
