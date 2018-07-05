@@ -8,8 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.List;
 
 import pdm.ifpb.com.projeto_pdm.controller.SolicitacaoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
@@ -27,6 +33,7 @@ public class TelaTrabalho extends Fragment {
 
     private Gson gson = new Gson();
     private Trabalho atual;
+    private SolicitacaoController controller;
 
     public TelaTrabalho() {
 
@@ -47,10 +54,11 @@ public class TelaTrabalho extends Fragment {
 
         Bundle argumento = getArguments();
 
-        verificarAnterior(argumento.getString("tela"));
-
         atual = gson.fromJson(argumento.getString("atual"),
                 Trabalho.class);
+        controller = new SolicitacaoController(getContext());
+
+        verificarAnterior(argumento.getString("tela"));
 
         TextView nome = getActivity().findViewById(R.id.nomeTrab);
         TextView descricao = getActivity().findViewById(R.id.descricaoTrab);
@@ -65,6 +73,9 @@ public class TelaTrabalho extends Fragment {
         horario.setText(atual.getHorario().toString() + "h - " + atual.getData());
         valor.setText(atual.getValor()+  " R$");
 
+
+
+
         Button btSolicitar = getActivity().findViewById(R.id.btSolicitar);
         btSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +87,6 @@ public class TelaTrabalho extends Fragment {
                     json.put("email",((menu)getActivity())
                             .getAtual().getEmail());
 
-                    SolicitacaoController controller = new
-                            SolicitacaoController(getContext());
                     controller.solicitarTrabalho(json.toString());
 
                 } catch (JSONException e) {
@@ -96,11 +105,54 @@ public class TelaTrabalho extends Fragment {
             case "meusTrabalhos":{
 
                 bt.setVisibility(View.GONE);
+
+                ListView listView = getActivity().findViewById(R.id.listaSolicitantes);
+                SolicitacaoAdapter adapter = new SolicitacaoAdapter(controller
+                        .buscarSolicitacoes(atual.getCodigo()));
+                listView.setAdapter(adapter);
                 break;
             }
             case "busca":{
+
                 break;
             }
+        }
+    }
+
+    private class SolicitacaoAdapter extends BaseAdapter{
+
+        private List<Usuario> solicitantes;
+
+        public SolicitacaoAdapter(List<Usuario> solicitantes) {
+            this.solicitantes = solicitantes;
+        }
+
+        @Override
+        public int getCount() {
+            return solicitantes.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return solicitantes.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            View view = convertView;
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            view = inflater.inflate(R.layout.solicitacoes, null);
+
+            TextView tv = view.findViewById(R.id.nomeSolicitante);
+            tv.setText(solicitantes.get(position).getNome());
+
+            return view;
         }
     }
 }

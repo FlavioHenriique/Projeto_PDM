@@ -6,12 +6,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.model.Trabalho;
+import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
 public class SolicitacaoController {
     private OkHttpClient client;
@@ -47,6 +51,35 @@ public class SolicitacaoController {
             e.printStackTrace();
         }
 
+    }
+
+    public List<Usuario> buscarSolicitacoes(int trabalho){
+
+        String url = urlApi + "/"+ trabalho;
+
+        Request request = new Request.Builder().url(url).get().build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.code() == 302){
+                return retornaLista(gson.fromJson(response.body()
+                        .string(),Usuario[].class));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Usuario> retornaLista(Usuario[] lista){
+
+        List<Usuario> novaLista = new ArrayList<>();
+
+        for(Usuario u : lista){
+            novaLista.add(u);
+        }
+        return novaLista;
     }
 
 }
