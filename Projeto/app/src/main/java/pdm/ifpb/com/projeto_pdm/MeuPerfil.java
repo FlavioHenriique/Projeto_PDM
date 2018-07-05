@@ -35,7 +35,7 @@ public class MeuPerfil extends Fragment {
     private Usuario atual;
 
     public MeuPerfil() {
-        // Required empty public constructor
+
     }
 
 

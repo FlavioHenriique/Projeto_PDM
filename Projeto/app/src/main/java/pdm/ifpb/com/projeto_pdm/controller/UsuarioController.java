@@ -55,44 +55,62 @@ public class UsuarioController {
 
     public void cadastrar(String dados){
 
-        String url = urlApi.concat("/cadastro");
-        RequestBody body = RequestBody.create(JSON, dados);
-        Request request = new Request.Builder().url(url)
-                .post(body).build();
+        if(verificarUsuario(gson.fromJson(dados, Usuario.class))){
 
-        try {
+            String url = urlApi.concat("/cadastro");
+            RequestBody body = RequestBody.create(JSON, dados);
+            Request request = new Request.Builder().url(url)
+                    .post(body).build();
 
-            Response response = client.newCall(request).execute();
+            try {
 
-            if (response.code() == 201){
-                Toast.makeText(context, "Usuário cadastrado!",
-                        Toast.LENGTH_SHORT).show();
-            }else if (response.code() == 403){
-                Toast.makeText(context, "Este email já está sendo utilizado!",
-                        Toast.LENGTH_SHORT).show();
+                Response response = client.newCall(request).execute();
+
+                if (response.code() == 201){
+                    Toast.makeText(context, "Usuário cadastrado!",
+                            Toast.LENGTH_SHORT).show();
+                }else if (response.code() == 403){
+                    Toast.makeText(context, "Este email já está sendo utilizado!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     public Usuario atualizar(Usuario u){
 
-        String url = urlApi;
-        RequestBody body = RequestBody.create(JSON, gson.toJson(u));
-        Request request = new Request.Builder().url(url).put(body).build();
+        if(verificarUsuario(u)){
+            String url = urlApi;
+            RequestBody body = RequestBody.create(JSON, gson.toJson(u));
+            Request request = new Request.Builder().url(url).put(body).build();
 
-        try {
-            Response response = client.newCall(request).execute();
-            Toast.makeText(context, "Usuário atualizado",
-                    Toast.LENGTH_SHORT).show();
+            try {
+                Response response = client.newCall(request).execute();
+                Toast.makeText(context, "Usuário atualizado",
+                        Toast.LENGTH_SHORT).show();
 
-            return gson.fromJson(response.body().string(), Usuario.class);
+                return gson.fromJson(response.body().string(), Usuario.class);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
+    }
+
+    public boolean verificarUsuario(Usuario u){
+
+        if(u.getCidade().equals("") || u.getNome().equals("")
+                || u.getEmail().equals("") || u.getSenha().equals("")
+                || u.getEstado().equals("")){
+
+            Toast.makeText(context, "Preencha todos os campos",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

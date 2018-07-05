@@ -43,7 +43,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="21dp"
         android:text="LOGIN"
-        android:textSize="40sp" />
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/cadastrar"
@@ -51,8 +53,9 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/loginEmail"
         android:layout_alignParentBottom="true"
+        android:textStyle="bold"
         android:layout_marginBottom="129dp"
-        android:textColor="#0000FF"
+        android:textColor="@android:color/holo_blue_light"
         android:text="Cadastre-se"
         android:textSize="20sp" />
 
