@@ -1,6 +1,7 @@
 package pdm.ifpb.com.projeto_pdm;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import pdm.ifpb.com.projeto_pdm.model.Usuario;
 public class TelaTrabalho extends Fragment {
 
     private Gson gson = new Gson();
+    private Button btSolicitar;
     private Trabalho atual;
     private SolicitacaoController controller;
 
@@ -74,47 +76,75 @@ public class TelaTrabalho extends Fragment {
         valor.setText(atual.getValor()+  " R$");
 
 
-
-
-        Button btSolicitar = getActivity().findViewById(R.id.btSolicitar);
+        btSolicitar = getActivity().findViewById(R.id.btSolicitar);
         btSolicitar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                JSONObject json = new JSONObject();
-                try {
-                    json.put("trabalho",atual.getCodigo());
-                    json.put("email",((menu)getActivity())
+                if (btSolicitar.getText().toString().equals("CANCELAR")) {
+                    controller.removerSolicitacao(atual.getCodigo(),((menu)getActivity())
                             .getAtual().getEmail());
 
-                    controller.solicitarTrabalho(json.toString());
+                    atualizaTela();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } else {
+                    JSONObject json = new JSONObject();
+                    try {
+                        json.put("trabalho", atual.getCodigo());
+                        json.put("email", ((menu) getActivity())
+                                .getAtual().getEmail());
+
+                        controller.solicitarTrabalho(json.toString());
+
+                        atualizaTela();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
 
     }
 
+    public void atualizaTela(){
+
+        Fragment fragment = new TelaTrabalho();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("atual",gson.toJson(atual));
+        bundle.putString("tela","busca");
+
+        fragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.frame_container,fragment)
+                .commit();
+    }
+
     public void verificarAnterior(String tela){
 
-        Button bt = getActivity().findViewById(R.id.btSolicitar);
+        btSolicitar = getActivity().findViewById(R.id.btSolicitar);
+        List<Usuario> lista = controller.buscarSolicitacoes(atual.getCodigo());
 
         switch(tela){
             case "meusTrabalhos":{
 
-                bt.setVisibility(View.GONE);
-
+                btSolicitar.setVisibility(View.GONE);
                 ListView listView = getActivity().findViewById(R.id.listaSolicitantes);
-                SolicitacaoAdapter adapter = new SolicitacaoAdapter(controller
-                        .buscarSolicitacoes(atual.getCodigo()));
+                SolicitacaoAdapter adapter = new SolicitacaoAdapter(lista);
                 listView.setAdapter(adapter);
                 break;
             }
             case "busca":{
+                for(Usuario u: lista){
+                    if(u.getEmail().equals(((menu)getActivity())
+                            .getAtual().getEmail())){
+                        btSolicitar.setText("CANCELAR");
+                        btSolicitar.setBackgroundColor(Color.RED);
+                        break;
+                    }
+                }
 
-                break;
             }
         }
     }

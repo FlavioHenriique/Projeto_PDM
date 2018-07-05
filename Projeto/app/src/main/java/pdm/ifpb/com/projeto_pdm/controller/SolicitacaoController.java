@@ -72,6 +72,24 @@ public class SolicitacaoController {
         return null;
     }
 
+    public void removerSolicitacao(int trabalho, String email){
+
+        String url = urlApi + "/"+ email + "/" + trabalho;
+
+        Request request = new Request.Builder().url(url).delete().build();
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.code()== 200){
+                Toast.makeText(context, "Solicitação cancelada",
+                        Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "Erro", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Usuario> retornaLista(Usuario[] lista){
 
         List<Usuario> novaLista = new ArrayList<>();
@@ -81,5 +99,7 @@ public class SolicitacaoController {
         }
         return novaLista;
     }
+
+
 
 }
