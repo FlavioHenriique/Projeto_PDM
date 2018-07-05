@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tNome"
         android:layout_alignTop="@+id/tNome"
-        android:backgroundTint="@android:color/holo_blue_light"
+        android:tint="@android:color/holo_blue_light"
         android:src="@android:drawable/ic_menu_delete" />
 </RelativeLayout>

@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:textStyle="bold"
+        android:layout_marginTop="13dp"
         android:text="Atualizar meu perfil"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/atNome"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="155dp" />
+        android:layout_marginBottom="144dp" />
 
     <EditText
         android:id="@+id/atSenha"
@@ -69,5 +69,40 @@
         android:text="Atualizar"
         android:textColor="@android:color/white"
         android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/atNome"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_marginBottom="-92dp"
+        android:text="Nome" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/atSenha"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_marginBottom="-174dp"
+        android:text="Senha" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/atCidade"
+        android:layout_alignStart="@+id/textView14"
+        android:text="Cidade" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/atEstado"
+        android:layout_alignStart="@+id/textView14"
+        android:layout_marginBottom="-1dp"
+        android:text="Estado" />
 
 </RelativeLayout>

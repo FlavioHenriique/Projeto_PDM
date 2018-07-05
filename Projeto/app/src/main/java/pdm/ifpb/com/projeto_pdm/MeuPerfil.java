@@ -69,7 +69,6 @@ public class MeuPerfil extends Fragment {
 
         atNome.setText(atual.getNome());
         atCidade.setText(atual.getCidade());
-        atSenha.setText(atual.getSenha());
 
         Button btAtualizar = getActivity().findViewById(R.id.btAtualizar);
         btAtualizar.setOnClickListener(new View.OnClickListener() {
