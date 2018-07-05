@@ -27,9 +27,9 @@ public class TrabalhoController {
     private String urlApi;
 
     public TrabalhoController(Context context){
-        gson = new Gson();
+        this.gson = new Gson();
         this.urlApi = "http://10.0.3.2:8080/pdm-api/pdm/trabalho/";
-        client = new OkHttpClient();
+        this.client = new OkHttpClient();
         this.context = context;
     }
 
@@ -63,12 +63,10 @@ public class TrabalhoController {
 
 
         String url = urlApi  +email;
-
         Request request = new Request.Builder().url(url).get().build();
 
         try {
             Response response = client.newCall(request).execute();
-
             if(response.body() != null){
 
                 return Arrays.asList(gson.fromJson(response.body()
@@ -85,14 +83,10 @@ public class TrabalhoController {
     public List<Trabalho> buscarTrabalhos(String campo, String valor, String email){
 
         String url = urlApi + "busca/" +campo+"/" + valor;
-
         Request request = new Request.Builder().url(url).get().build();
 
         try {
             Response response = client.newCall(request).execute();
-
-
-
             return verificaContratante(email,gson.fromJson(response.body()
                     .string(), Trabalho[].class));
 
@@ -113,14 +107,12 @@ public class TrabalhoController {
                 novaLista.add(t);
             }
         }
-
         return novaLista;
     }
 
     public void excluirTrabalho(int codigo){
 
         String url = urlApi +codigo;
-
         Request request = new Request.Builder().url(url).delete().build();
 
         try {

@@ -25,7 +25,7 @@ public class UsuarioController {
     private String urlApi;
 
     public UsuarioController(Context context){
-        client = new OkHttpClient();
+        this.client = new OkHttpClient();
         this.context = context;
         this.urlApi ="http://10.0.3.2:8080/pdm-api/pdm/usuario";
         this.gson = new Gson();
@@ -35,7 +35,6 @@ public class UsuarioController {
 
         String url = urlApi;
         RequestBody body = RequestBody.create(JSON, dados);
-
         Request request = new Request.Builder().url(url).post(body).build();
 
         try {

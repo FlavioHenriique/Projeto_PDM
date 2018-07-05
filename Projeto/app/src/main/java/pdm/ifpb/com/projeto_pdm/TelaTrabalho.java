@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import pdm.ifpb.com.projeto_pdm.controller.SolicitacaoController;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
@@ -22,6 +26,7 @@ import pdm.ifpb.com.projeto_pdm.model.Usuario;
 public class TelaTrabalho extends Fragment {
 
     private Gson gson = new Gson();
+    private Trabalho atual;
 
     public TelaTrabalho() {
 
@@ -44,7 +49,7 @@ public class TelaTrabalho extends Fragment {
 
         verificarAnterior(argumento.getString("tela"));
 
-        Trabalho atual = gson.fromJson(argumento.getString("atual"),
+        atual = gson.fromJson(argumento.getString("atual"),
                 Trabalho.class);
 
         TextView nome = getActivity().findViewById(R.id.nomeTrab);
@@ -59,6 +64,27 @@ public class TelaTrabalho extends Fragment {
                 " - " + atual.getEstado().toString());
         horario.setText(atual.getHorario().toString() + "h - " + atual.getData());
         valor.setText(atual.getValor()+  " R$");
+
+        Button btSolicitar = getActivity().findViewById(R.id.btSolicitar);
+        btSolicitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("trabalho",atual.getCodigo());
+                    json.put("email",((menu)getActivity())
+                            .getAtual().getEmail());
+
+                    SolicitacaoController controller = new
+                            SolicitacaoController(getContext());
+                    controller.solicitarTrabalho(json.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
