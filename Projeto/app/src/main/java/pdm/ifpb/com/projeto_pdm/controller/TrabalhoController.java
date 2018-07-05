@@ -33,27 +33,30 @@ public class TrabalhoController {
         this.context = context;
     }
 
-    public void cadastrar(Trabalho trabalho){
+    public boolean cadastrar(Trabalho trabalho){
 
-        String url = urlApi;
+        if(verificaTrabalho(trabalho)){
+            String url = urlApi;
+            RequestBody body = RequestBody.create(JSON, gson.toJson(trabalho));
+            Request request = new Request.Builder().url(url).post(body).build();
 
-        RequestBody body = RequestBody.create(JSON, gson.toJson(trabalho));
+            try {
+                Response response = client.newCall(request).execute();
 
-        Request request = new Request.Builder().url(url).post(body).build();
-
-        try {
-            Response response = client.newCall(request).execute();
-
-            if(response.code() == 201){
-                Toast.makeText(context, "Trabalho cadastrado",
-                        Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(context, "Erro!",
-                        Toast.LENGTH_SHORT).show();
+                if(response.code() == 201){
+                    Toast.makeText(context, "Trabalho cadastrado",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                }else{
+                    Toast.makeText(context, "Erro!",
+                            Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+            return false;
     }
 
     public List<Trabalho> meusTrabalhos(String email){
@@ -129,5 +132,18 @@ public class TrabalhoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean verificaTrabalho(Trabalho t){
+
+        if(t.getData().equals("") || t.getCategoria().equals("")
+                || t.getCidade().equals("") || t.getDescricao().equals("")
+                || t.getHorario().equals("") || t.getTitulo().equals("")){
+
+            Toast.makeText(context, "Preencha todos os campos",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }

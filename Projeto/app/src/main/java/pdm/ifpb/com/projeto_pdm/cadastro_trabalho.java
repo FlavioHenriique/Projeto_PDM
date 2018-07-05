@@ -91,16 +91,25 @@ public class cadastro_trabalho extends Fragment {
                 trabalho.setHorario(horario.getText().toString());
                 trabalho.setTitulo(titulo.getText().toString());
                 trabalho.setEstado(estados.getSelectedItem().toString());
-                trabalho.setValor(Float.parseFloat(valor.getText().toString()));
 
-                controller.cadastrar(trabalho);
+                if(!valor.getText().toString().equals("")){
 
-                cidade.setText("");
-                valor.setText("");
-                horario.setText("");
-                data.setText("");
-                descricao.setText("");
+                    Float value = Float.parseFloat(valor.getText().toString());
+                    trabalho.setValor(value);
 
+                    if(controller.cadastrar(trabalho)){
+                        cidade.setText("");
+                        valor.setText("");
+                        horario.setText("");
+                        data.setText("");
+                        titulo.setText("");
+                        descricao.setText("");
+                    }
+
+                }else{
+                    Toast.makeText(getContext(), "Preencha os campos",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
