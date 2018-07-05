@@ -90,6 +90,27 @@ public class SolicitacaoController {
         }
     }
 
+    public List<Trabalho> minhasSolicitacoes(String email){
+
+        String url = urlApi + "/busca" + "/" + email;
+
+        Request request = new Request.Builder().url(url).get().build();
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.code() == 200){
+                Trabalho[] trabalhos = gson.fromJson(response.body().string(),
+                        Trabalho[].class );
+
+                return retornaListaTrabalhos(trabalhos);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public List<Usuario> retornaLista(Usuario[] lista){
 
         List<Usuario> novaLista = new ArrayList<>();
@@ -100,6 +121,14 @@ public class SolicitacaoController {
         return novaLista;
     }
 
+    public List<Trabalho> retornaListaTrabalhos(Trabalho[] lista){
 
+        List<Trabalho> novaLista = new ArrayList<>();
+
+        for(Trabalho t : lista){
+            novaLista.add(t);
+        }
+        return novaLista;
+    }
 
 }

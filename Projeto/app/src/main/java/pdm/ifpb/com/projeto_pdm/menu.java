@@ -121,6 +121,10 @@ public class menu extends AppCompatActivity
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, new TelaPrincipal()).commit();
 
+        }else if (id == R.id.minhas_solicitacoes){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_container, new MinhasSolicitacoes())
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

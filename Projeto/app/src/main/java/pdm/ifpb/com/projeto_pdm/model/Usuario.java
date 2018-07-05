@@ -11,7 +11,6 @@ public class Usuario {
     private String senha;
     private String cidade;
     private String estado;
-    private List<Trabalho> trabalhos;
 
     public Usuario() {
 
@@ -24,7 +23,6 @@ public class Usuario {
         this.senha = senha;
         this.cidade = cidade;
         this.estado = estado;
-        trabalhos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -51,14 +49,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Trabalho> getTrabalhos() {
-        return trabalhos;
-    }
-
-    public void setTrabalhos(List<Trabalho> trabalhos) {
-        this.trabalhos = trabalhos;
-    }
-
     public String getCidade() {
         return cidade;
     }
@@ -76,50 +66,31 @@ public class Usuario {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.senha);
-        hash = 67 * hash + Objects.hashCode(this.cidade);
-        hash = 67 * hash + Objects.hashCode(this.estado);
-        return hash;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(nome, usuario.nome) &&
+                Objects.equals(email, usuario.email) &&
+                Objects.equals(senha, usuario.senha) &&
+                Objects.equals(cidade, usuario.cidade) &&
+                Objects.equals(estado, usuario.estado);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.senha, other.senha)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidade, other.cidade)) {
-            return false;
-        }
-        if (!Objects.equals(this.estado, other.estado)) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+
+        return Objects.hash(nome, email, senha, cidade, estado);
     }
 
     @Override
     public String toString() {
-        return "Usuario{" + "nome=" + nome + ", email=" + email + ", senha="
-                + senha + ", cidade=" + cidade + ", estado=" + estado + '}';
+        return "Usuario{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", estado='" + estado + '\'' +
+                '}';
     }
-
 }

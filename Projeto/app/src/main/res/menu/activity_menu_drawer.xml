@@ -22,6 +22,12 @@
             android:id="@+id/meus_trabalhos"
             android:icon="@drawable/ic_menu_manage"
             android:title="Meus trabalhos" />
+
+        <item
+            android:id="@+id/minhas_solicitacoes"
+            android:icon="@drawable/ic_mode_edit_black_24dp"
+            android:title="Minhas solicitações" />
+
         <item
             android:id="@+id/sair"
             android:icon="@drawable/ic_arrow_forward_black_24dp"
