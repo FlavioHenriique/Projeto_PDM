@@ -41,7 +41,6 @@ public class MinhasSolicitacoes extends Fragment {
         String email = ((menu)getActivity()).getAtual().getEmail();
 
         SolicitacaoController controller = new SolicitacaoController(getContext());
-
         List<Trabalho> lista = controller.minhasSolicitacoes(email);
 
         ListView list = view.findViewById(R.id.lista_minhas_solicitacoes);

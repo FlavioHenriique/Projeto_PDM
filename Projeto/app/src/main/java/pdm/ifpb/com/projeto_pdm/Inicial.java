@@ -1,15 +1,19 @@
 package pdm.ifpb.com.projeto_pdm;
 
+import android.app.AlertDialog;
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -38,6 +42,20 @@ public class Inicial extends AppCompatActivity {
                 Intent intent = new Intent(Inicial.this,
                         Cadastro_usuario.class);
                 startActivity(intent);
+            }
+        });
+
+
+        final Button bt = findViewById(R.id.notification);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Inicial.this);
+                builder.setMessage("testando porra").setTitle("titulando");
+
+                AlertDialog dialog = builder.show();
+
             }
         });
 

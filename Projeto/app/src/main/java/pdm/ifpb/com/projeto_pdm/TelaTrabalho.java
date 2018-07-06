@@ -1,6 +1,8 @@
 package pdm.ifpb.com.projeto_pdm;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -84,7 +86,7 @@ public class TelaTrabalho extends Fragment {
                     controller.removerSolicitacao(atual.getCodigo(),((menu)getActivity())
                             .getAtual().getEmail());
 
-                    atualizaTela();
+                    atualizaTela("busca");
 
                 } else {
                     JSONObject json = new JSONObject();
@@ -95,7 +97,7 @@ public class TelaTrabalho extends Fragment {
 
                         controller.solicitarTrabalho(json.toString());
 
-                        atualizaTela();
+                        atualizaTela("busca");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -106,13 +108,13 @@ public class TelaTrabalho extends Fragment {
 
     }
 
-    public void atualizaTela(){
+    public void atualizaTela(String tela){
 
         Fragment fragment = new TelaTrabalho();
 
         Bundle bundle = new Bundle();
         bundle.putString("atual",gson.toJson(atual));
-        bundle.putString("tela","busca");
+        bundle.putString("tela",tela);
 
         fragment.setArguments(bundle);
 
@@ -173,7 +175,7 @@ public class TelaTrabalho extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             View view = convertView;
             LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -182,7 +184,45 @@ public class TelaTrabalho extends Fragment {
             TextView tv = view.findViewById(R.id.nomeSolicitante);
             tv.setText(solicitantes.get(position).getNome());
 
+            TextView tvlocal = view.findViewById(R.id.localSolicitante);
+            tvlocal.setText(solicitantes.get(position).getCidade() +
+                    " - " + solicitantes.get(position).getEstado());
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog
+                            .Builder(getContext());
+                    builder
+                            .setTitle("Solicitação de trabalho")
+                            .setMessage("Você aceita a solicitação de "+
+                            solicitantes.get(position).getNome() + "?")
+
+                    .setPositiveButton("Aceitar", new DialogInterface
+                            .OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                            .setNegativeButton("Recusar", new DialogInterface
+                                    .OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    controller.removerSolicitacao(atual.getCodigo(),
+                                            solicitantes.get(position).getEmail());
+
+                                    atualizaTela("meusTrabalhos");
+                                }
+                            })
+                            .show();
+                }
+            });
+
             return view;
         }
+
+
     }
 }
