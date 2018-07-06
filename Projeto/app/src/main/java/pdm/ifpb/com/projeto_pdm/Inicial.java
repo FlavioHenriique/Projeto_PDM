@@ -45,20 +45,6 @@ public class Inicial extends AppCompatActivity {
             }
         });
 
-
-        final Button bt = findViewById(R.id.notification);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(Inicial.this);
-                builder.setMessage("testando porra").setTitle("titulando");
-
-                AlertDialog dialog = builder.show();
-
-            }
-        });
-
         Button btEntrar = findViewById(R.id.btEntrar);
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
