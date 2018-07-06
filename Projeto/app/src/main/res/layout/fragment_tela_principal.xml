@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/trabalhosCidade"
         android:layout_width="match_parent"
-        android:layout_height="439dp"
+        android:layout_height="430dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
@@ -19,9 +19,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
         android:text="Trabalhos na sua cidade"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/nenhum_trabalho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView7"
+        android:layout_marginTop="51dp"
+        android:text="Nenhum trabalho encontrado"
+        android:textSize="20dp" />
 </RelativeLayout>

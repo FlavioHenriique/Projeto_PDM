@@ -32,7 +32,6 @@ public class MinhasSolicitacoes extends Fragment {
         return inflater.inflate(R.layout.fragment_minhas_solicitacoes,
                 container, false);
 
-
     }
 
     @Override

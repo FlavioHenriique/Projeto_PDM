@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,6 @@ public class TelaPrincipal extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.fragment_tela_principal,
                 container, false);
     }
@@ -40,16 +39,22 @@ public class TelaPrincipal extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        String cidade = ((menu)getActivity()).getAtual().getCidade();
-        email = ((menu)getActivity()).getAtual().getEmail();
+        String cidade = ((menu) getActivity()).getAtual().getCidade();
+        email = ((menu) getActivity()).getAtual().getEmail();
 
         TrabalhoController controller = new TrabalhoController(getContext());
-        List<Trabalho> lista = controller.buscarTrabalhos("cidade",cidade,email);
+        List<Trabalho> lista = controller.buscarTrabalhos("cidade", cidade, email);
 
-        ListView listView = getView().findViewById(R.id.trabalhosCidade);
-        MyAdapter adapter = new MyAdapter(getContext(),lista, "busca",email);
-        adapter.setManager(getFragmentManager());
-        listView.setAdapter(adapter);
+        TextView textView = getActivity().findViewById(R.id.nenhum_trabalho);
+
+        if (!lista.isEmpty()){
+
+            textView.setVisibility(View.GONE);
+
+            ListView listView = getView().findViewById(R.id.trabalhosCidade);
+            MyAdapter adapter = new MyAdapter(getContext(), lista, "busca", email);
+            adapter.setManager(getFragmentManager());
+            listView.setAdapter(adapter);
+        }
     }
-
 }
