@@ -157,5 +157,7 @@ public class menu extends AppCompatActivity
                 .Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
+
+
     }
 }

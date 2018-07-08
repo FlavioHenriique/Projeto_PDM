@@ -43,7 +43,6 @@ public class TelaTrabalho extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,14 +68,15 @@ public class TelaTrabalho extends Fragment {
         TextView localizacao = getActivity().findViewById(R.id.localizacaoTrab);
         TextView horario = getActivity().findViewById(R.id.horariodata);
         TextView valor = getActivity().findViewById(R.id.valortrab);
+        TextView contratante = getActivity().findViewById(R.id.contratanteTrab);
 
+        contratante.setText("Contratante: " +atual.getContratante().getNome());
         nome.setText(atual.getTitulo().toString());
         descricao.setText(atual.getDescricao().toString());
         localizacao.setText("Localização: "+atual.getCidade().toString() +
                 " - " + atual.getEstado().toString());
         horario.setText(atual.getHorario().toString() + "h - " + atual.getData());
         valor.setText(atual.getValor()+  " R$");
-
 
         btSolicitar = getActivity().findViewById(R.id.btSolicitar);
         btSolicitar.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +90,7 @@ public class TelaTrabalho extends Fragment {
 
                 } else {
                     JSONObject json = new JSONObject();
+
                     try {
                         json.put("trabalho", atual.getCodigo());
                         json.put("email", ((menu) getActivity())
@@ -146,7 +147,6 @@ public class TelaTrabalho extends Fragment {
                         break;
                     }
                 }
-
             }
         }
     }
@@ -214,9 +214,9 @@ public class TelaTrabalho extends Fragment {
                                             solicitantes.get(position).getEmail());
 
                                     atualizaTela("meusTrabalhos");
+
                                 }
-                            })
-                            .show();
+                            }).show();
                 }
             });
 
