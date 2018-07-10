@@ -193,16 +193,25 @@ public class TelaTrabalho extends Fragment {
                 public void onClick(View v) {
                     AlertDialog.Builder builder = new AlertDialog
                             .Builder(getContext());
-                    builder
-                            .setTitle("Solicitação de trabalho")
+                    builder.setTitle("Solicitação de trabalho")
                             .setMessage("Você aceita a solicitação de "+
                             solicitantes.get(position).getNome() + "?")
-
                     .setPositiveButton("Aceitar", new DialogInterface
                             .OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
+                            JSONObject json = new JSONObject();
+                            try {
+                                json.put("emailUsuario",solicitantes
+                                        .get(position).getEmail());
+                                json.put("codTrabalho",atual.getCodigo());
+
+                                controller.aceitarSolicitacao(json.toString());
+                                atualizaTela("meusTrabalhos");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     })
                             .setNegativeButton("Recusar", new DialogInterface

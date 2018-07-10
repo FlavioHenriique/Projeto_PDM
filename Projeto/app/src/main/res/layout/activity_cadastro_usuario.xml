@@ -6,25 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".Cadastro_usuario">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:text="Cadastro de usuário"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
-
     <EditText
         android:id="@+id/atNome"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Digite seu nome"
         android:inputType="textPersonName" />
@@ -33,9 +21,8 @@
         android:id="@+id/cadEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView15"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
         android:ems="10"
         android:hint="Digite seu email"
         android:inputType="textPersonName" />
@@ -55,15 +42,17 @@
         android:id="@+id/cadEstado"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView16"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp" />
+        android:layout_marginTop="-118dp" />
 
     <EditText
         android:id="@+id/cadSenha"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="219dp"
         android:ems="10"
         android:inputType="textPassword" />
 
@@ -83,26 +72,27 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/atNome"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/atNome"
-        android:layout_marginBottom="-82dp"
+        android:layout_marginTop="20dp"
         android:text="Nome" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cadEmail"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/atNome"
-        android:layout_marginBottom="-159dp"
+        android:layout_marginTop="113dp"
         android:text="Email" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/cadEstado"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/atNome"
+        android:layout_marginBottom="118dp"
         android:text="Estado" />
 
     <TextView
@@ -114,10 +104,12 @@
         android:text="Cidade" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/cadSenha"
         android:layout_alignStart="@+id/atNome"
+        android:layout_marginBottom="-219dp"
         android:text="Senha" />
+
 </RelativeLayout>

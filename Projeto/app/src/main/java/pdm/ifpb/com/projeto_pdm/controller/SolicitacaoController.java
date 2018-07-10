@@ -111,6 +111,25 @@ public class SolicitacaoController {
         return null;
     }
 
+    public void aceitarSolicitacao(String dados){
+
+        RequestBody body = RequestBody.create(JSON, dados);
+        Request request = new Request.Builder().url(urlApi).put(body).build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            if (response.code() == 200){
+                Toast.makeText(context, "Solicitação aceita",
+                        Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "Erro",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Usuario> retornaLista(Usuario[] lista){
 
         List<Usuario> novaLista = new ArrayList<>();

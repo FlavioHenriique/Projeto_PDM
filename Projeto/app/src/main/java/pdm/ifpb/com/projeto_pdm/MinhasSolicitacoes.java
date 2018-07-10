@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -43,10 +44,16 @@ public class MinhasSolicitacoes extends Fragment {
         SolicitacaoController controller = new SolicitacaoController(getContext());
         List<Trabalho> lista = controller.minhasSolicitacoes(email);
 
-        ListView list = view.findViewById(R.id.lista_minhas_solicitacoes);
-        MyAdapter adapter = new MyAdapter(getContext(),lista,"busca",
-                email);
-        adapter.setManager(getFragmentManager());
-        list.setAdapter(adapter);
+        if(!lista.isEmpty()) {
+            TextView textView = getActivity().findViewById(R.id.nenhumaSolicitacao);
+            textView.setVisibility(View.GONE);
+
+            ListView list = view.findViewById(R.id.lista_minhas_solicitacoes);
+            MyAdapter adapter = new MyAdapter(getContext(), lista, "busca",
+                    email);
+            adapter.setManager(getFragmentManager());
+            list.setAdapter(adapter);
+        }
+
     }
 }

@@ -22,6 +22,8 @@ public class Cadastro_usuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
 
+        this.setTitle("Cadastro de usuário");
+
         final Spinner spinner = findViewById(R.id.cadEstado);
         spinner.setPrompt("Selecione");
 

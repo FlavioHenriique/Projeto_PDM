@@ -60,6 +60,7 @@ public class MeusTrabalhos extends Fragment {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_container, fragment);
                 transaction.commit();
+                getActivity().setTitle("Cadastro de trabalho");
             }
         });
         return view;

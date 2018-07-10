@@ -33,6 +33,7 @@ public class Inicial extends AppCompatActivity {
         setContentView(R.layout.activity_inicial);
         strictmode();
         handler = new MyHandler();
+        this.setTitle("Login");
 
          TextView tv = findViewById(R.id.cadastrar);
         tv.setOnClickListener(new View.OnClickListener() {

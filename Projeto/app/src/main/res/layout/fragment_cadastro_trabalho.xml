@@ -5,27 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".cadastro_trabalho">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:text="Cadastro de trabalho"
-
-        tools:layout_editor_absoluteX="151dp"
-        tools:layout_editor_absoluteY="16dp" />
-
     <EditText
         android:id="@+id/tituloTrabalho"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Digite o título"
         android:inputType="textPersonName"
@@ -39,7 +25,7 @@
         android:layout_height="31dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="113dp"
+        android:layout_marginTop="70dp"
         tools:layout_editor_absoluteX="71dp"
         tools:layout_editor_absoluteY="116dp" />
 
@@ -49,7 +35,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="158dp"
+        android:layout_marginTop="119dp"
         android:ems="10"
         android:hint="Digite a cidade"
         android:inputType="textPersonName"
@@ -62,7 +48,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="177dp"
         android:ems="10"
         android:hint="Digite o valor"
         android:inputType="textPersonName"
@@ -75,7 +61,7 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="179dp"
+        android:layout_marginBottom="187dp"
         android:ems="10"
         android:hint="Digite o horário"
         android:inputType="textPersonName"
@@ -88,10 +74,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
+
+        android:layout_marginBottom="126dp"
         android:ems="10"
         android:hint="Digite a data"
-
         tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="345dp" />
 
@@ -125,7 +111,6 @@
         android:id="@+id/categoriaTrabalho"
         android:layout_width="345dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/horarioTrabalho"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

@@ -37,6 +37,7 @@ public class menu extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.setTitle("Trabalhos na sua cidade");
 
         Gson gson = new Gson();
         Intent intent = getIntent();
@@ -106,25 +107,30 @@ public class menu extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new busca()).commit();
+            this.setTitle("Buscar trabalhos");
 
         } else if (id == R.id.meu_perfil) {
 
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new MeuPerfil()).commit();
+            this.setTitle("Meu perfil");
 
         } else if (id == R.id.meus_trabalhos) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new MeusTrabalhos()).commit();
+            this.setTitle("Meus trabalhos");
 
         }else if (id == R.id.tela_inicial){
 
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, new TelaPrincipal()).commit();
+            this.setTitle("Trabalhos na sua cidade");
 
         }else if (id == R.id.minhas_solicitacoes){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_container, new MinhasSolicitacoes())
                     .commit();
+            this.setTitle("Minhas solicitações");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
