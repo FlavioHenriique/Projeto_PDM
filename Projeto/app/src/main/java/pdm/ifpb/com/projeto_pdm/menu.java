@@ -113,7 +113,7 @@ public class menu extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.frame_container, new MeuPerfil()).commit();
-            this.setTitle("Meu perfil");
+            this.setTitle("Editar meu perfil");
 
         } else if (id == R.id.meus_trabalhos) {
             getSupportFragmentManager().beginTransaction().
@@ -157,13 +157,10 @@ public class menu extends AppCompatActivity
 
     }
 
-
     public void strictmode(){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
                 .Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
-
-
     }
 }

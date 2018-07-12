@@ -13,6 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import pdm.ifpb.com.projeto_pdm.R;
 import pdm.ifpb.com.projeto_pdm.menu;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
@@ -27,7 +28,8 @@ public class UsuarioController {
     public UsuarioController(Context context){
         this.client = new OkHttpClient();
         this.context = context;
-        this.urlApi ="http://10.0.3.2:8080/pdm-api/pdm/usuario";
+        //this.urlApi ="http://10.0.3.2:8081/pdm-api/pdm/usuario";
+        this.urlApi = context.getString(R.string.restUrl).concat("usuario");
         this.gson = new Gson();
     }
 
