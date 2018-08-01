@@ -35,6 +35,15 @@ public class Inicial extends AppCompatActivity {
         handler = new MyHandler();
         this.setTitle("Login");
 
+        TextView web = findViewById(R.id.webview);
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Inicial.this, WebActivity.class);
+                startActivity(intent);
+            }
+        });
+
          TextView tv = findViewById(R.id.cadastrar);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,29 +55,6 @@ public class Inicial extends AppCompatActivity {
             }
         });
 
-        Button bnot = findViewById(R.id.btNot);
-        bnot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                NotificationCompat.Builder b = new NotificationCompat
-                        .Builder(Inicial.this);
-                b.setAutoCancel(true)
-                        .setDefaults(NotificationCompat.DEFAULT_ALL)
-                        .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.drawable.ic_add)
-                        .setTicker("notificação nova")
-                        .setContentTitle("titulo")
-                        .setContentText("mensagem")
-                        .setContentInfo("INFO");
-
-                NotificationManager nm = (NotificationManager)
-                        getSystemService(Context.NOTIFICATION_SERVICE);
-                nm.notify(count, b.build());
-                count++;
-            }
-
-        });
 
         Button btEntrar = findViewById(R.id.btEntrar);
         btEntrar.setOnClickListener(new View.OnClickListener() {

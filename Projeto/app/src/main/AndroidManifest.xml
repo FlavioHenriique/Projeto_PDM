@@ -39,7 +39,9 @@
         <service
             android:name=".services.LoginService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>
