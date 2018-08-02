@@ -41,18 +41,19 @@ public class Inicial extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
-        //strictmode();
+        strictmode();
         handler = new MyHandler();
         this.setTitle("Login");
 
-        verificarConexao();
-        verificarUsuarioLogado();
-
+        if(verificarConexao()){
+            verificarUsuarioLogado();
+        }
         TextView web = findViewById(R.id.webview);
         web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Inicial.this, WebActivity.class);
+                Intent intent = new Intent(Inicial.this,
+                        WebActivity.class);
                 startActivity(intent);
             }
         });
