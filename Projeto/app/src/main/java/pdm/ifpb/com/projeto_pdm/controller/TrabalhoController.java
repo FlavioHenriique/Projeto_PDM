@@ -30,7 +30,7 @@ public class TrabalhoController {
     public TrabalhoController(Context context){
         this.gson = new Gson();
         //this.urlApi = "http://10.0.3.2:8081/pdm-api/pdm/trabalho/";
-        this.urlApi = context.getString(R.string.restUrl).concat("trabalho");
+        this.urlApi = context.getString(R.string.restUrl).concat("trabalho/");
         this.client = new OkHttpClient();
         this.context = context;
     }
@@ -64,7 +64,7 @@ public class TrabalhoController {
     public List<Trabalho> meusTrabalhos(String email){
 
 
-        String url = urlApi  +email;
+        String url = urlApi  + email;
         Request request = new Request.Builder().url(url).get().build();
 
         try {
@@ -84,7 +84,7 @@ public class TrabalhoController {
 
     public List<Trabalho> buscarTrabalhos(String campo, String valor, String email){
 
-        String url = urlApi + "/busca/" +campo+"/" + valor;
+        String url = urlApi + "busca/" +campo+"/" + valor;
 
         Request request = new Request.Builder().url(url).get().build();
 

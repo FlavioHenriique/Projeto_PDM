@@ -70,7 +70,7 @@ public class TelaTrabalho extends Fragment {
         TextView valor = getActivity().findViewById(R.id.valortrab);
         TextView contratante = getActivity().findViewById(R.id.contratanteTrab);
 
-        contratante.setText("Contratante: " +atual.getContratante().getNome());
+        contratante.setText("Autor: " +atual.getContratante().getNome());
         nome.setText(atual.getTitulo().toString());
         descricao.setText(atual.getDescricao().toString());
         localizacao.setText("Localização: "+atual.getCidade().toString() +
