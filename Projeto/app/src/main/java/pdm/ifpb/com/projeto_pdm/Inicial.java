@@ -1,10 +1,15 @@
 package pdm.ifpb.com.projeto_pdm;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
@@ -15,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -29,14 +35,17 @@ public class Inicial extends AppCompatActivity {
     public static Handler handler;
     private static int count = 0;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
-        strictmode();
+        //strictmode();
         handler = new MyHandler();
         this.setTitle("Login");
 
+        verificarConexao();
         verificarUsuarioLogado();
 
         TextView web = findViewById(R.id.webview);
@@ -53,40 +62,44 @@ public class Inicial extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(Inicial.this,
-                        Cadastro_usuario.class);
-                startActivity(intent);
+                if(verificarConexao()){
+                    Intent intent = new Intent(Inicial.this,
+                            Cadastro_usuario.class);
+                    startActivity(intent);
+                }
             }
         });
-
 
         Button btEntrar = findViewById(R.id.btEntrar);
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText email = findViewById(R.id.loginEmail);
-                EditText senha = findViewById(R.id.loginSenha);
+                if(verificarConexao()){
+                    EditText email = findViewById(R.id.loginEmail);
+                    EditText senha = findViewById(R.id.loginSenha);
 
 
-                try {
-                    JSONObject json = new JSONObject();
-                    json.put("email",email.getText().toString());
-                    json.put("senha",senha.getText().toString());
+                    try {
+                        JSONObject json = new JSONObject();
+                        json.put("email",email.getText().toString());
+                        json.put("senha",senha.getText().toString());
 
-                    Intent intent = new Intent(Inicial.this,
-                            LoginService.class);
-                    intent.putExtra("login",json.toString());
+                        Intent intent = new Intent(Inicial.this,
+                                LoginService.class);
+                        intent.putExtra("login",json.toString());
 
-                    startService(intent);
+                        startService(intent);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
         }
 
-        public void strictmode(){
+
+    public void strictmode(){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
                 .Builder().permitAll().build();
 
@@ -103,6 +116,18 @@ public class Inicial extends AppCompatActivity {
         if(!user.equals("default")){
             entrar(user);
         }
+    }
+
+    private boolean verificarConexao(){
+        ConnectivityManager manager = (ConnectivityManager)
+                getSystemService(CONNECTIVITY_SERVICE);
+
+        if(manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()){
+            return true;
+        }
+        Toast.makeText(this, "Sem conexão com a internet!",
+                Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     public void entrar(String user){
@@ -129,4 +154,5 @@ public class Inicial extends AppCompatActivity {
                 entrar((String) msg.obj);
             }
         }
+
 }
