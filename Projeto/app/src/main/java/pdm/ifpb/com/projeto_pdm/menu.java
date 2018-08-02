@@ -1,6 +1,8 @@
 package pdm.ifpb.com.projeto_pdm;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -101,6 +103,12 @@ public class menu extends AppCompatActivity
         if (id == R.id.sair) {
             Intent intent = new Intent(menu.this, Inicial.class);
             startActivity(intent);
+
+            SharedPreferences.Editor editor = getSharedPreferences("usuario",
+                    Context.MODE_PRIVATE).edit();
+            editor.remove("atual");
+            editor.commit();
+
             finish();
 
         } else if (id == R.id.buscar_trabalhos) {

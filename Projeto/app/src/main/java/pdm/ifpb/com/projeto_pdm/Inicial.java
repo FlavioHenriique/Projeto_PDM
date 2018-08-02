@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
@@ -27,6 +28,7 @@ public class Inicial extends AppCompatActivity {
 
     public static Handler handler;
     private static int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,8 @@ public class Inicial extends AppCompatActivity {
         strictmode();
         handler = new MyHandler();
         this.setTitle("Login");
+
+        verificarUsuarioLogado();
 
         TextView web = findViewById(R.id.webview);
         web.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +92,27 @@ public class Inicial extends AppCompatActivity {
 
         StrictMode.setThreadPolicy(policy);
     }
+
+    public void verificarUsuarioLogado(){
+
+        Gson gson = new Gson();
+
+        SharedPreferences preferences = getSharedPreferences("usuario"
+                ,Context.MODE_PRIVATE);
+        String user = preferences.getString("atual","default");
+        if(!user.equals("default")){
+            entrar(user);
+        }
+    }
+
+    public void entrar(String user){
+
+        Intent intent = new Intent(Inicial.this, menu.class);
+        intent.putExtra("atual",user);
+        startActivity(intent);
+        finish();
+    }
+
         private class MyHandler extends Handler{
             public MyHandler(){
                 super();
@@ -96,12 +121,12 @@ public class Inicial extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
 
-                Gson gson = new Gson();
+                SharedPreferences.Editor editor = getSharedPreferences("usuario",
+                        Context.MODE_PRIVATE).edit();
+                editor.putString("atual",(String)msg.obj);
+                editor.commit();
 
-                Intent intent = new Intent(Inicial.this, menu.class);
-                intent.putExtra("atual",(String) msg.obj);
-                startActivity(intent);
-                finish();
+                entrar((String) msg.obj);
             }
         }
 }

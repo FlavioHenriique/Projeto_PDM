@@ -84,13 +84,14 @@ public class TrabalhoController {
 
     public List<Trabalho> buscarTrabalhos(String campo, String valor, String email){
 
-        String url = urlApi + "busca/" +campo+"/" + valor;
+        String url = urlApi + "/busca/" +campo+"/" + valor;
+
         Request request = new Request.Builder().url(url).get().build();
 
         try {
             Response response = client.newCall(request).execute();
-            return verificaContratante(email,gson.fromJson(response.body()
-                    .string(), Trabalho[].class));
+            String corpo = response.body().string();
+            return verificaContratante(email,gson.fromJson(corpo, Trabalho[].class));
 
         } catch (IOException e) {
             e.printStackTrace();
