@@ -3,10 +3,13 @@ package pdm.ifpb.com.projeto_pdm;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,12 +29,17 @@ import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
+import pdm.ifpb.com.projeto_pdm.sqlite.FotoController;
 
 public class menu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Usuario atual;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,8 @@ public class menu extends AppCompatActivity
                 Usuario.class);
 
         strictmode();
-        nomeUsuario();
+        items();
+        foto();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,12 +65,12 @@ public class menu extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     add(R.id.frame_container, new TelaPrincipal()).commit();
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -87,7 +97,7 @@ public class menu extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.settings) {
             return true;
         }
 
@@ -139,6 +149,11 @@ public class menu extends AppCompatActivity
                     .replace(R.id.frame_container, new MinhasSolicitacoes())
                     .commit();
             this.setTitle("Minhas solicitações");
+
+        }else if(id == R.id.configuracoes){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_container,new Configuracoes())
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -155,13 +170,15 @@ public class menu extends AppCompatActivity
 
     }
 
-    public void nomeUsuario(){
+    public void items(){
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
-        TextView tv = header.findViewById(R.id.nomeUsuario);
 
+        TextView tv = header.findViewById(R.id.nomeUsuario);
         tv.setText(atual.getNome());
+
+        imageView = header.findViewById(R.id.imagem);
 
     }
 
@@ -171,4 +188,29 @@ public class menu extends AppCompatActivity
 
         StrictMode.setThreadPolicy(policy);
     }
+
+    private void foto(){
+
+        FotoController controller = new FotoController(this);
+        String foto = controller.recuperaFoto();
+
+        byte[] bytes = Base64.decode(foto,0);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        imageView.setImageBitmap(bitmap);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Bitmap imagem = (Bitmap) data.getExtras().get("data");
+        imageView.setImageBitmap(imagem);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        imagem.compress(Bitmap.CompressFormat.PNG,100,stream);
+        byte[] array = stream.toByteArray();
+
+        // Salvando no SQLite
+        FotoController controller = new FotoController(this);
+        controller.inserirFoto(Base64.encodeToString(array,Base64.DEFAULT));
+    }
+
 }

@@ -29,6 +29,11 @@
             android:title="Minhas solicitações" />
 
         <item
+            android:id="@+id/configuracoes"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Configurações" />
+
+        <item
             android:id="@+id/sair"
             android:icon="@drawable/ic_arrow_forward_black_24dp"
             android:title="Sair" />
