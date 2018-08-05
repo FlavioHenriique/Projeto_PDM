@@ -28,12 +28,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
+import pdm.ifpb.com.projeto_pdm.receiver.InternetReceiver;
 import pdm.ifpb.com.projeto_pdm.services.LoginService;
 
 public class Inicial extends AppCompatActivity {
 
     public static Handler handler;
     private static int count = 0;
+    private InternetReceiver receiver;
 
     @SuppressLint("NewApi")
     @Override
@@ -44,10 +46,13 @@ public class Inicial extends AppCompatActivity {
         strictmode();
         handler = new MyHandler();
         this.setTitle("Login");
+        registerReceiver(receiver,new IntentFilter
+                ("android.net.wifi.WIFI_STATE_CHANGED"));
 
-        if(verificarConexao()){
+        /*if(verificarConexao(){
             verificarUsuarioLogado();
-        }
+        }*/
+
         TextView web = findViewById(R.id.webview);
         web.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,4 +161,11 @@ public class Inicial extends AppCompatActivity {
             }
         }
 
+    @Override
+    protected void onDestroy() {
+
+        unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 }
+
