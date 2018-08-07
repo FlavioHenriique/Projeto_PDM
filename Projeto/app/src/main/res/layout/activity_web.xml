@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".menu"
-    tools:showIn="@layout/app_bar_menu">
+    tools:context=".WebActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_container"
+    <WebView
+        android:id="@+id/webViewBlog"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="506dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-    </FrameLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>

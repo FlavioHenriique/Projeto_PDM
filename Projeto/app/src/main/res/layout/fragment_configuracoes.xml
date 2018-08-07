@@ -3,23 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TelaPrincipal">
+    tools:context=".Configuracoes">
 
-
-    <ListView
-        android:id="@+id/trabalhosCidade"
-        android:layout_width="match_parent"
-        android:layout_height="430dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/nenhum_trabalho" />
 
     <TextView
-        android:id="@+id/nenhum_trabalho"
+        android:id="@+id/selecionar_foto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:text="Nenhum trabalho encontrado"
-        android:textSize="20dp" />
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="25dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"
+        android:text="Selecionar foto" />
 </RelativeLayout>

@@ -5,6 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/tela_inicial"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Tela inicial" />
+
+        <item
             android:id="@+id/meu_perfil"
             android:icon="@drawable/ic_account_circle_black_24dp"
             android:title="Meu perfil" />
@@ -17,6 +22,17 @@
             android:id="@+id/meus_trabalhos"
             android:icon="@drawable/ic_menu_manage"
             android:title="Meus trabalhos" />
+
+        <item
+            android:id="@+id/minhas_solicitacoes"
+            android:icon="@drawable/ic_mode_edit_black_24dp"
+            android:title="Minhas solicitações" />
+
+        <item
+            android:id="@+id/configuracoes"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Configurações" />
+
         <item
             android:id="@+id/sair"
             android:icon="@drawable/ic_arrow_forward_black_24dp"

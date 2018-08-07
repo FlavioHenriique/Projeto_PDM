@@ -6,76 +6,92 @@
     tools:context=".MeuPerfil">
 
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="28dp"
-        android:textSize="30sp"
-        android:text="Meu perfil" />
-
     <EditText
-        android:id="@+id/cadNome"
-        android:layout_width="wrap_content"
+        android:id="@+id/atNome"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp"
-        android:ems="10"
-        android:text="Nome do usuário"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="163dp"
+        android:layout_marginTop="62dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Email do usuário" />
+        android:text="Nome do usuário" />
 
     <EditText
-        android:id="@+id/editText6"
-        android:layout_width="wrap_content"
+        android:id="@+id/atCidade"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="168dp"
+        android:layout_marginBottom="219dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Cidade" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="212dp"
+        android:id="@+id/atEstado"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="116dp"
-        android:layout_marginStart="86dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="156dp" />
 
     <EditText
-        android:id="@+id/editText7"
-        android:layout_width="wrap_content"
+        android:id="@+id/atSenha"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="148dp"
         android:ems="10"
-        android:text="Senha"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button6"
-        android:layout_width="215dp"
+        android:id="@+id/btAtualizar"
+        android:layout_width="266dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/cadNome"
-        android:layout_marginBottom="51dp"
-        android:textSize="20sp"
-        android:text="Atualizar perfil" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Atualizar"
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/atNome"
+        android:layout_marginTop="35dp"
+        android:text="Nome" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/atNome"
+        android:layout_marginTop="121dp"
+        android:text="Senha" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/atNome"
+        android:layout_marginTop="213dp"
+        android:text="Cidade" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/atNome"
+        android:layout_marginBottom="190dp"
+        android:text="Estado" />
 
 </RelativeLayout>

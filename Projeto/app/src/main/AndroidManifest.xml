@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pdm.ifpb.com.projeto_pdm">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +15,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".receiver.InternetReceiver">
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".Cadastro_usuario"
             android:exported="true" />
@@ -33,13 +42,15 @@
         </activity>
 
         <service
-            android:name=".pdm.ifpb.com.projeto_pdm.services.CadastroService"
+            android:name=".services.CadastroService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".pdm.ifpb.com.projeto_pdm.services.LoginService"
+            android:name=".services.LoginService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".WebActivity"></activity>
     </application>
 
 </manifest>

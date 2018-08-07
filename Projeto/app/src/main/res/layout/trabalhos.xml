@@ -4,25 +4,37 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/nome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tNome"
+        android:layout_width="346dp"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="22dp"
         android:layout_weight="1"
         android:text="TextView"
-        android:textSize="25sp" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/descricao"
-        android:layout_width="wrap_content"
+        android:id="@+id/tDescricao"
+        android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/nome"
-        android:layout_marginTop="75dp"
+        android:layout_alignStart="@+id/tNome"
+        android:layout_marginTop="69dp"
         android:layout_weight="1"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/excluir"
+        android:layout_width="42dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tNome"
+        android:layout_alignEnd="@+id/tNome"
+        android:src="@android:drawable/ic_menu_delete"
+        android:tint="@android:color/holo_blue_light" />
+
 </RelativeLayout>

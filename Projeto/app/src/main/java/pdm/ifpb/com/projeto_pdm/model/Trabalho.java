@@ -1,4 +1,4 @@
-package pdm.ifpb.com.projeto_pdm.pdm.ifpb.com.projeto_pdm.model;
+package pdm.ifpb.com.projeto_pdm.model;
 
 import java.util.ArrayList;
 import java.util.List;
