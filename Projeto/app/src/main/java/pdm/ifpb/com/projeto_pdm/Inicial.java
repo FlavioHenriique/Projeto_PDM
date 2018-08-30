@@ -46,12 +46,12 @@ public class Inicial extends AppCompatActivity {
         strictmode();
         handler = new MyHandler();
         this.setTitle("Login");
-        registerReceiver(receiver,new IntentFilter
-                ("android.net.wifi.WIFI_STATE_CHANGED"));
+        //registerReceiver(receiver,new IntentFilter
+                //("android.net.wifi.WIFI_STATE_CHANGED"));
 
-        /*if(verificarConexao(){
+        if(verificarConexao()){
             verificarUsuarioLogado();
-        }*/
+        }
 
         TextView web = findViewById(R.id.webview);
         web.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +114,6 @@ public class Inicial extends AppCompatActivity {
 
     public void verificarUsuarioLogado(){
 
-        Gson gson = new Gson();
-
         SharedPreferences preferences = getSharedPreferences("usuario"
                 ,Context.MODE_PRIVATE);
         String user = preferences.getString("atual","default");
@@ -164,7 +162,7 @@ public class Inicial extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 
-        unregisterReceiver(receiver);
+    //    unregisterReceiver(receiver);
         super.onDestroy();
     }
 }
