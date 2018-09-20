@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +30,6 @@ public class busca extends Fragment {
     private String email;
     public busca() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +57,11 @@ public class busca extends Fragment {
         btcategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation shake = AnimationUtils.loadAnimation(
+                        v.getContext(),
+                        R.anim.anim_alpha
+                );
+                v.startAnimation(shake);
                 TrabalhoController controller = new TrabalhoController(getContext());
                 List<Trabalho> lista = controller.buscarTrabalhos("categoria",
                         spinner.getSelectedItem().toString(),
@@ -69,7 +75,11 @@ public class busca extends Fragment {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Animation shake = AnimationUtils.loadAnimation(
+                        v.getContext(),
+                        R.anim.anim_alpha
+                );
+                v.startAnimation(shake);
                 EditText busca = getActivity().findViewById(R.id.cidadeBuscada);
 
                 if(!busca.getText().toString().equals("")){

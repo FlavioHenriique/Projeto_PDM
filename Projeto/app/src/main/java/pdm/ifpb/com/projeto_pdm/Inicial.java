@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.BatteryManager;
 import android.os.Handler;
@@ -17,6 +18,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -52,21 +55,24 @@ public class Inicial extends AppCompatActivity {
             verificarUsuarioLogado();
         }
 
-        TextView web = findViewById(R.id.webview);
+        final TextView web = findViewById(R.id.webview);
+
         web.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                web.setTextColor(Color.RED);
+
                 Intent intent = new Intent(Inicial.this,
                         WebActivity.class);
                 startActivity(intent);
             }
         });
 
-         TextView tv = findViewById(R.id.cadastrar);
+         final TextView tv = findViewById(R.id.cadastrar);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                tv.setTextColor(Color.RED);
                 if(verificarConexao()){
                     Intent intent = new Intent(Inicial.this,
                             Cadastro_usuario.class);
@@ -97,6 +103,11 @@ public class Inicial extends AppCompatActivity {
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation shake = AnimationUtils.loadAnimation(
+                        v.getContext(),
+                        R.anim.anim_alpha
+                );
+                v.startAnimation(shake);
                 if(verificarConexao()){
                     EditText email = findViewById(R.id.loginEmail);
                     EditText senha = findViewById(R.id.loginSenha);

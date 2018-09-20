@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +40,12 @@ public class Cadastro_usuario extends AppCompatActivity {
         btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation shake = AnimationUtils.loadAnimation(
+                        v.getContext(),
+                        R.anim.anim_alpha
+                );
+                v.startAnimation(shake);
+
                 EditText nome = findViewById(R.id.atNome);
                 EditText cidade = findViewById(R.id.cadCidade);
 
