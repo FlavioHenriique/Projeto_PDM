@@ -42,14 +42,14 @@ public class MinhasSolicitacoes extends Fragment {
         String email = ((menu)getActivity()).getAtual().getEmail();
 
         SolicitacaoController controller = new SolicitacaoController(getContext());
-        List<Trabalho> lista = controller.minhasSolicitacoes(email);
+        List<Trabalho> trabalhos = controller.minhasSolicitacoes(email);
 
-        if(!lista.isEmpty()) {
+        if(!trabalhos.isEmpty()) {
             TextView textView = getActivity().findViewById(R.id.nenhumaSolicitacao);
             textView.setVisibility(View.GONE);
 
             ListView list = view.findViewById(R.id.lista_minhas_solicitacoes);
-            MyAdapter adapter = new MyAdapter(getContext(), lista, "busca",
+            MyAdapter adapter = new MyAdapter(getContext(), trabalhos, "busca",
                     email);
             adapter.setManager(getFragmentManager());
             list.setAdapter(adapter);

@@ -32,12 +32,11 @@ import pdm.ifpb.com.projeto_pdm.receiver.InternetReceiver;
 import pdm.ifpb.com.projeto_pdm.services.LoginService;
 
 public class Inicial extends AppCompatActivity {
-
+    private int cont = 0;
     public static Handler handler;
     private static int count = 0;
     private InternetReceiver receiver;
 
-    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -76,6 +75,24 @@ public class Inicial extends AppCompatActivity {
             }
         });
 
+        /*Button  btnot = findViewById(R.id.notificacao);
+        btnot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplicationContext(),"default")
+                                .setSmallIcon(R.drawable.ic_add)
+                                .setContentTitle("My notification")
+                                .setContentText("Hello World!");
+
+                NotificationManager manager = (NotificationManager)
+                        getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(cont,mBuilder.build());
+                cont ++;
+
+            }
+        });*/
+
         Button btEntrar = findViewById(R.id.btEntrar);
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +114,7 @@ public class Inicial extends AppCompatActivity {
                         startService(intent);
 
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                       e.printStackTrace();
                     }
                 }
             }
@@ -117,7 +134,9 @@ public class Inicial extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("usuario"
                 ,Context.MODE_PRIVATE);
         String user = preferences.getString("atual","default");
+
         if(!user.equals("default")){
+
             entrar(user);
         }
     }

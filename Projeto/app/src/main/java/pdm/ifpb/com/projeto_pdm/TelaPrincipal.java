@@ -1,10 +1,13 @@
 package pdm.ifpb.com.projeto_pdm;
 
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pdm.ifpb.com.projeto_pdm.adapter.MyAdapter;
+import pdm.ifpb.com.projeto_pdm.controller.SolicitacaoController;
 import pdm.ifpb.com.projeto_pdm.controller.TrabalhoController;
+import pdm.ifpb.com.projeto_pdm.model.Notificacao;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 
 public class TelaPrincipal extends Fragment {
@@ -55,6 +60,21 @@ public class TelaPrincipal extends Fragment {
             MyAdapter adapter = new MyAdapter(getContext(), lista, "busca", email);
             adapter.setManager(getFragmentManager());
             listView.setAdapter(adapter);
+        }
+
+        SolicitacaoController solicitacaoController = new SolicitacaoController(getContext());
+        List<Notificacao> notificacoes = solicitacaoController.minhasNotificacoes(email);
+
+        for (int k = 0; k < notificacoes.size(); k ++){
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(getContext(),"default")
+                            .setSmallIcon(R.drawable.ic_add)
+                            .setContentTitle("Projeto PDM")
+                            .setContentText(notificacoes.get(k).getMensagem());
+
+            NotificationManager manager = (NotificationManager)
+                    getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(k +1, mBuilder.build());
         }
     }
 }

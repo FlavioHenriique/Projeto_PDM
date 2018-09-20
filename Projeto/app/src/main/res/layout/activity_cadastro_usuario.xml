@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="59dp"
         android:ems="10"
         android:hint="Digite seu nome"
         android:inputType="textPersonName" />
@@ -72,10 +72,20 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/atNome"
+        android:layout_alignStart="@+id/atNome"
+        android:layout_marginBottom="-59dp"
+        android:text="Nome *" />
+
+    <TextView
+        android:id="@+id/obrigatorio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/atNome"
-        android:layout_marginTop="20dp"
-        android:text="Nome" />
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginTop="12dp"
+        android:text="* (obrigatório)" />
 
     <TextView
         android:id="@+id/textView15"
@@ -84,7 +94,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/atNome"
         android:layout_marginTop="113dp"
-        android:text="Email" />
+        android:text="Email *" />
 
     <TextView
         android:id="@+id/textView16"
@@ -93,7 +103,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/atNome"
         android:layout_marginBottom="118dp"
-        android:text="Estado" />
+        android:text="Estado *" />
 
     <TextView
         android:id="@+id/textView17"
@@ -101,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/cadCidade"
         android:layout_alignStart="@+id/atNome"
-        android:text="Cidade" />
+        android:text="Cidade *" />
 
     <TextView
         android:id="@+id/textView5"
@@ -110,6 +120,6 @@
         android:layout_above="@+id/cadSenha"
         android:layout_alignStart="@+id/atNome"
         android:layout_marginBottom="-219dp"
-        android:text="Senha" />
+        android:text="Senha *" />
 
 </RelativeLayout>

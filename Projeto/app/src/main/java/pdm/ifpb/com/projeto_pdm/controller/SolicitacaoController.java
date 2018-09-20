@@ -1,5 +1,6 @@
 package pdm.ifpb.com.projeto_pdm.controller;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -7,6 +8,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -15,6 +17,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import pdm.ifpb.com.projeto_pdm.R;
+import pdm.ifpb.com.projeto_pdm.model.Notificacao;
 import pdm.ifpb.com.projeto_pdm.model.Trabalho;
 import pdm.ifpb.com.projeto_pdm.model.Usuario;
 
@@ -95,7 +98,6 @@ public class SolicitacaoController {
     public List<Trabalho> minhasSolicitacoes(String email){
 
         String url = urlApi + "/busca" + "/" + email;
-
         Request request = new Request.Builder().url(url).get().build();
         try {
             Response response = client.newCall(request).execute();
@@ -132,24 +134,35 @@ public class SolicitacaoController {
         }
     }
 
+    public List<Notificacao> minhasNotificacoes(String email){
+        String url = this.urlApi.concat("/notificacoes/"+ email);
+        Request request = new Request.Builder().get().url(url).build();
+        try {
+            Response response = client.newCall(request).execute();
+            if(response.code() == 200){
+                Notificacao[] notificacoes = gson.fromJson(response
+                        .body().string(),Notificacao[].class);
+
+                return retornaNOtificacoes(notificacoes);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Usuario> retornaLista(Usuario[] lista){
 
-        List<Usuario> novaLista = new ArrayList<>();
-
-        for(Usuario u : lista){
-            novaLista.add(u);
-        }
-        return novaLista;
+        return Arrays.asList(lista);
     }
 
     public List<Trabalho> retornaListaTrabalhos(Trabalho[] lista){
 
-        List<Trabalho> novaLista = new ArrayList<>();
+        return Arrays.asList(lista);
+    }
 
-        for(Trabalho t : lista){
-            novaLista.add(t);
-        }
-        return novaLista;
+    public List<Notificacao> retornaNOtificacoes(Notificacao[] lista){
+        return Arrays.asList(lista);
     }
 
 }

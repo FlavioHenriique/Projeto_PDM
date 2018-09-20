@@ -1,8 +1,10 @@
 package pdm.ifpb.com.projeto_pdm.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.*;
 import android.view.LayoutInflater;
@@ -115,13 +117,31 @@ public class MyAdapter extends BaseAdapter{
             excluir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TrabalhoController controller = new TrabalhoController(context);
-                    controller.excluirTrabalho(lista.get(position).getCodigo());
 
-                    Fragment fragment = new MeusTrabalhos();
-                    manager.beginTransaction()
-                            .replace(R.id.frame_container, fragment)
-                            .commit();
+                    AlertDialog.Builder builder = new AlertDialog
+                            .Builder(context);
+                    builder.setTitle("Deletar trabalho")
+                            .setMessage("Deseja deletar esse trabalho?")
+                            .setPositiveButton("Sim", new DialogInterface
+                                    .OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TrabalhoController controller = new TrabalhoController(context);
+                                    controller.excluirTrabalho(lista.get(position).getCodigo());
+
+                                    Fragment fragment = new MeusTrabalhos();
+                                    manager.beginTransaction()
+                                            .replace(R.id.frame_container, fragment)
+                                            .commit();
+                                }
+                                    })
+                            .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                    .show();
 
                 }
             });

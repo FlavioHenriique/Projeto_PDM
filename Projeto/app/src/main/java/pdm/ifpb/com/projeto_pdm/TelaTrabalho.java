@@ -90,14 +90,11 @@ public class TelaTrabalho extends Fragment {
 
                 } else {
                     JSONObject json = new JSONObject();
-
                     try {
                         json.put("trabalho", atual.getCodigo());
                         json.put("email", ((menu) getActivity())
                                 .getAtual().getEmail());
-
                         controller.solicitarTrabalho(json.toString());
-
                         atualizaTela("busca");
 
                     } catch (JSONException e) {
@@ -106,7 +103,6 @@ public class TelaTrabalho extends Fragment {
                 }
             }
         });
-
     }
 
     public void atualizaTela(String tela){
@@ -223,7 +219,6 @@ public class TelaTrabalho extends Fragment {
                                             solicitantes.get(position).getEmail());
 
                                     atualizaTela("meusTrabalhos");
-
                                 }
                             }).show();
                 }

@@ -50,8 +50,6 @@ public class MeusTrabalhos extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_meus_trabalhos, container,
                 false);
 
-
-
         FloatingActionButton button = view.findViewById(R.id.addTrabalho);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +81,5 @@ public class MeusTrabalhos extends Fragment {
         adapter.setManager(getFragmentManager());
         lview.setAdapter(adapter);
     }
-
-
 }
 

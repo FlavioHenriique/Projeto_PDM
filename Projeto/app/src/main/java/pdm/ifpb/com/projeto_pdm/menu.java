@@ -192,7 +192,7 @@ public class menu extends AppCompatActivity
     private void foto(){
 
         FotoController controller = new FotoController(this);
-        String foto = controller.recuperaFoto();
+        String foto = controller.recuperaFoto(this.getAtual().getEmail());
 
         byte[] bytes = Base64.decode(foto,0);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
@@ -210,7 +210,10 @@ public class menu extends AppCompatActivity
 
         // Salvando no SQLite
         FotoController controller = new FotoController(this);
-        controller.inserirFoto(Base64.encodeToString(array,Base64.DEFAULT));
+        controller.inserirFoto(
+                Base64.encodeToString(array,Base64.DEFAULT),
+                this.getAtual().getEmail()
+        );
     }
 
 }

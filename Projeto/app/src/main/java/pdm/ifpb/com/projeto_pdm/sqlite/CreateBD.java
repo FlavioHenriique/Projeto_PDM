@@ -17,7 +17,7 @@ public class CreateBD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sql = "CREATE TABLE foto (foto varchar);";
+        String sql = "CREATE TABLE foto (foto varchar, email varchar);";
         db.execSQL(sql);
     }
 

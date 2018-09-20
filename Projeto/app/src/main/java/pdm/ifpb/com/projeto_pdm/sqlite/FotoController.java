@@ -14,29 +14,32 @@ public class FotoController {
         create = new CreateBD(context);
     }
 
-    public void inserirFoto(String foto){
+    public void inserirFoto(String foto, String email){
 
         db = create.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("foto",foto);
+        values.put("email",email);
+
         db.delete("foto",null,null);
         long i = db.insert("foto", null, values);
         System.out.println(i);
         db.close();
     }
 
-    public String recuperaFoto(){
+    public String recuperaFoto(String email){
 
         Cursor cursor;
-        String[] campos = {"foto"};
+        String sql  = "SELECT foto from foto where email = ?";
         db = create.getReadableDatabase();
-        cursor = db.query("foto",campos,
-                null,null,null,null,null);
-
-        if(cursor!= null){
+        cursor = db.rawQuery(sql,new String[]{email});
+        if(cursor!= null && cursor.getCount()>0){
             cursor.moveToFirst();
+            db.close();
+            return cursor.getString(0);
+        }else{
+            return "";
         }
-        db.close();
-        return cursor.getString(0);
+
     }
 }
