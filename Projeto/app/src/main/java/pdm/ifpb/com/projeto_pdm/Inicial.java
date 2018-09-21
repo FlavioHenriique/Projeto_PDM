@@ -81,24 +81,6 @@ public class Inicial extends AppCompatActivity {
             }
         });
 
-        /*Button  btnot = findViewById(R.id.notificacao);
-        btnot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(getApplicationContext(),"default")
-                                .setSmallIcon(R.drawable.ic_add)
-                                .setContentTitle("My notification")
-                                .setContentText("Hello World!");
-
-                NotificationManager manager = (NotificationManager)
-                        getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.notify(cont,mBuilder.build());
-                cont ++;
-
-            }
-        });*/
-
         Button btEntrar = findViewById(R.id.btEntrar);
         btEntrar.setOnClickListener(new View.OnClickListener() {
             @Override

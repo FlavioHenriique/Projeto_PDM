@@ -20,8 +20,7 @@ public class FotoController {
         ContentValues values = new ContentValues();
         values.put("foto",foto);
         values.put("email",email);
-
-        db.delete("foto",null,null);
+        db.delete("foto","email = ?", new String[]{email});
         long i = db.insert("foto", null, values);
         System.out.println(i);
         db.close();
